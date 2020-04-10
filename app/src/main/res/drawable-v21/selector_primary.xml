@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/black_06" >
+
+    <item
+        android:state_pressed="false" android:state_enabled="true" android:state_selected="false"
+        android:drawable="@color/colorPrimary" />
+    <item
+        android:state_pressed="true" android:state_enabled="true" android:state_selected="false"
+        android:drawable="@color/black_06"/>
+
+    <item android:drawable="@color/colorPrimary"/>
+
+</ripple>
