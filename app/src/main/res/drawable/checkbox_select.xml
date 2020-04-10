@@ -9,7 +9,7 @@
 
     <path
         android:name="bounds"
-        android:fillColor="@color/white"
+        android:fillColor="@android:color/white"
         android:pathData="M 0 0 H 24 V 24 H 0 V 0 Z" />
 
     <path
