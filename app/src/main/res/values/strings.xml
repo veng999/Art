@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Art</string>
+    <string name="menu_newsFeed">Лента</string>
+    <string name="menu_artist">Художник</string>
+    <string name="menu_works">Работы</string>
+    <string name="menu_more">Еще</string>
 </resources>
