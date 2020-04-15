@@ -1,4 +1,4 @@
-package com.Illarionov.art.stringUtils
+package com.Illarionov.art.utils
 
 import android.text.Html
 import android.text.Spanned

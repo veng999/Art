@@ -1,12 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.Illarionov.art"
@@ -15,6 +21,7 @@ android {
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled=true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -53,6 +60,9 @@ dependencies {
     implementation group: 'com.squareup.picasso', name: 'picasso', version: '2.71828'
     implementation("com.squareup.moshi:moshi-kotlin:1.8.0")
     implementation group: 'androidx.recyclerview', name: 'recyclerview', version: '1.1.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0'
+
 
     // Paging List
     implementation 'androidx.paging:paging-runtime:2.1.2'
@@ -61,8 +71,7 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-    implementation 'androidx.room:room-runtime:2.2.5'
-    annotationProcessor 'androidx.room:room-compiler:2.2.5'
+
 
     // Card View
     def cardview_version = "1.0.0"
@@ -81,4 +90,6 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
 }

@@ -1,7 +1,9 @@
 package com.company.myartist.model
 
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneOffset
+import android.os.Build
+import androidx.annotation.RequiresApi
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 data class Event(
     val action: String?,
@@ -20,6 +22,7 @@ data class Event(
 ) {
     var content: List<Any>? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getFormatDate(current: Long): String {
         val currentDateTime = LocalDateTime.ofEpochSecond(current, 0, ZoneOffset.UTC)
         val eventDateTime = LocalDateTime.ofEpochSecond((date ?: "0L").toLong(), 0, ZoneOffset.UTC)
@@ -34,6 +37,7 @@ data class Event(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun getFormatMonth(date: LocalDateTime) =
         if (date.monthValue < 10) "0${date.monthValue}" else date.monthValue
 

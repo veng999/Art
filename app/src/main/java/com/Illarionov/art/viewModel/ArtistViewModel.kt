@@ -1,25 +1,44 @@
 package com.Illarionov.art.viewModel
 
-import android.content.Intent
 import android.view.MenuItem
-import com.Illarionov.art.MainActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.Illarionov.art.R
-import com.Illarionov.art.view.ArtistFragment
+import com.Illarionov.art.network.ArtistRemoteDataSource
+import com.company.myartist.model.Event
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import io.reactivex.Scheduler
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 
-class ArtistViewModel() : BottomNavigationView.OnNavigationItemSelectedListener {
+class ArtistViewModel(
+    dataSource: ArtistRemoteDataSource,
+    backgroundScheduler: Scheduler ) :
+    BottomNavigationView.OnNavigationItemSelectedListener, ViewModel() {
+
+    private val compositeDisposable = CompositeDisposable()
+    val listOfEvents = MutableLiveData<List<Event>>()
+
+    init{
+        dataSource.loadNews()
+            .subscribeOn(backgroundScheduler)
+            .subscribe {listOfEvents.postValue(it.data?.events)}
+            .addTo(compositeDisposable)
+    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_newsFeed -> {
-
-                /*val intent = Intent(this, ArtistFragment::class.java)*/
                 return true
             }
 
-
             else -> false
         }
+    }
+
+    override fun onCleared() {
+        compositeDisposable.dispose()
+        super.onCleared()
     }
 
 
