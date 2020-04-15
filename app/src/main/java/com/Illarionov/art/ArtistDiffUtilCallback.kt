@@ -5,7 +5,7 @@ import com.company.myartist.model.Event
 
 class ArtistDiffUtilCallback : DiffUtil.ItemCallback<Event>() {
     override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
-        return oldItem.user_id == newItem.user_id
+        return oldItem.getBeforeLastIdEvent() == newItem.getBeforeLastIdEvent()
     }
 
     override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {

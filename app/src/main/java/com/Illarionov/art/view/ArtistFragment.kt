@@ -45,7 +45,7 @@ class ArtistFragment : Fragment() {
 
     private fun displayEventList(events: List<Event>) {
         artistAdapter.submitList(events)
-        news_feed_recycler_view.visibility = View.VISIBLE
+//        news_feed_recycler_view.visibility = View.VISIBLE
     }
 
     private fun displayError(message: String) {
@@ -83,9 +83,9 @@ class ArtistFragment : Fragment() {
     private fun setupView() {
         artistAdapter = ArtistAdapter(object: ArtistRecyclerViewAdapterListener {
             override fun onClickEvent(id: String) {
-                val intent = Intent(context, ArtistFragment::class.java)
-                intent.putExtra(Intent.EXTRA_TEXT, id)
-                startActivity(intent)
+//                val intent = Intent(context, ArtistFragment::class.java)
+//                intent.putExtra(Intent.EXTRA_TEXT, id)
+//                startActivity(intent)
             }
         })
     }

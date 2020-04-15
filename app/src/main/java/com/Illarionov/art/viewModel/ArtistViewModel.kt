@@ -17,7 +17,7 @@ class ArtistViewModel(
     BottomNavigationView.OnNavigationItemSelectedListener, ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
-    val listOfEvents = MutableLiveData<List<Event>>()
+    val listOfEvents = MutableLiveData<List<Event>>() //todo для работы с постраничным адаптером нужно использовать LivePagedList
 
     init{
         dataSource.loadNews()

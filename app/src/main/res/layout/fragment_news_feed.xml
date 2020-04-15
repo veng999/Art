@@ -7,36 +7,36 @@
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="0dp">
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginTop="0dp">-->
 
 
-        <TextView
-            android:id="@+id/action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="12sp"
-            tools:text="Some acion will appear here" />
+<!--        <TextView-->
+<!--            android:id="@+id/action"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
+<!--            android:textColor="@color/cardview_dark_background"-->
+<!--            android:textSize="12sp"-->
+<!--            tools:text="Some acion will appear here" />-->
 
-        <TextView
-            android:id="@+id/date_of_news"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/action"
-            android:paddingLeft="140dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="12sp"
-            tools:ignore="RtlHardcoded"
-            tools:text="Release June 25, 2017" />
+<!--        <TextView-->
+<!--            android:id="@+id/date_of_news"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toRightOf="@+id/action"-->
+<!--            android:paddingLeft="140dp"-->
+<!--            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
+<!--            android:textColor="@color/cardview_dark_background"-->
+<!--            android:textSize="12sp"-->
+<!--            tools:ignore="RtlHardcoded"-->
+<!--            tools:text="Release June 25, 2017" />-->
 
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/news_feed_recycler_view"
@@ -45,7 +45,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/view_artist_item"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
