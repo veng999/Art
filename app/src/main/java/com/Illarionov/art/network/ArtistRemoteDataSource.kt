@@ -4,7 +4,7 @@ import com.Illarionov.art.rest_api.ArtistApiService
 import com.company.myartist.model.response.EventsResponse
 import io.reactivex.Observable
 
-open class ArtistRemoteDataSource() {
+class ArtistRemoteDataSource() {
 
     private val api: ArtistApiService = ArtistApiService.create()
 

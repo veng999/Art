@@ -1,6 +1,5 @@
-package com.Illarionov.art.view
+package com.Illarionov.art.view.ui.news
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,45 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.Illarionov.art.ArtistAdapter
+import com.Illarionov.art.ArtistDataSourceFactory
 import com.Illarionov.art.ArtistRecyclerViewAdapterListener
 import com.Illarionov.art.R
 import com.Illarionov.art.network.ArtistRemoteDataSource
-import com.Illarionov.art.viewModel.ArtistViewModel
+import com.Illarionov.art.rest_api.ArtistApiService
 import com.company.myartist.model.Event
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_news_feed.*
 import kotlinx.android.synthetic.main.fragment_news_feed.view.*
 
-class ArtistFragment : Fragment() {
+class NewsFragment : Fragment() {
 
-    private val TAG = ArtistFragment::class.java.simpleName
+    private val TAG = NewsFragment::class.java.simpleName
     private lateinit var artistAdapter: ArtistAdapter
-    private lateinit var viewModel: ArtistViewModel
+    private lateinit var viewModel: NewsViewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupViewModel()
-    }
-
-    private fun setupViewModel() {
-        viewModel = ArtistViewModel(
-            ArtistRemoteDataSource(),
-            Schedulers.io()
-        )
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupView()
-    }
-
-    private fun displayEventList(events: List<Event>) {
-        artistAdapter.submitList(events)
-//        news_feed_recycler_view.visibility = View.VISIBLE
-    }
-
-    private fun displayError(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onCreateView(
@@ -63,6 +41,27 @@ class ArtistFragment : Fragment() {
             adapter = artistAdapter
         }
         return root
+    }
+
+    private fun setupViewModel() {
+        viewModel = NewsViewModel(
+            ArtistDataSourceFactory(ArtistApiService.create()),
+            ArtistRemoteDataSource(),
+            Schedulers.io()
+        )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupView()
+    }
+
+    private fun displayEventList(events: List<Event>) {
+        artistAdapter.submitList(events)
+    }
+
+    private fun displayError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onStart() {
@@ -83,9 +82,6 @@ class ArtistFragment : Fragment() {
     private fun setupView() {
         artistAdapter = ArtistAdapter(object: ArtistRecyclerViewAdapterListener {
             override fun onClickEvent(id: String) {
-//                val intent = Intent(context, ArtistFragment::class.java)
-//                intent.putExtra(Intent.EXTRA_TEXT, id)
-//                startActivity(intent)
             }
         })
     }

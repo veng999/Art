@@ -21,15 +21,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        navigation = findViewById(R.id.bottom_navigation_view)
+        navigation = findViewById(R.id.nav_view)
 
         navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.menu_newsFeed
+            R.id.menu_newsFeed, R.id.menu_artist, R.id.menu_works, R.id.menu_more
         ))
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        bottom_navigation_view.setupWithNavController(navController)
+        navigation.setupWithNavController(navController)
 
     }
 
