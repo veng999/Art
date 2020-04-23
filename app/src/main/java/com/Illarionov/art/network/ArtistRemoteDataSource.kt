@@ -11,18 +11,18 @@ import com.company.myartist.model.Event
 import com.company.myartist.model.response.EventsResponse
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 
-class ArtistRemoteDataSource() : ItemKeyedDataSource<Int, Event>() {
+class ArtistRemoteDataSource() : ItemKeyedDataSource<Long, Event>() {
 
     private val api: ArtistApiService = ArtistApiService.create()
     val initialLoadStateLiveData: MutableLiveData<NetworkState> = MutableLiveData()
     val paginatedStateLiveData : MutableLiveData<NetworkState> = MutableLiveData()
     private val compositeDisposable = CompositeDisposable()
-    private var pageNumber = 1
     private val TAG = ArtistRemoteDataSource::class.java.simpleName
-    private lateinit var loadParams: LoadParams<Int>
+    private lateinit var loadParams: LoadParams<Long>
     private lateinit var loadCallback: LoadCallback<Event>
 
 
@@ -31,71 +31,63 @@ class ArtistRemoteDataSource() : ItemKeyedDataSource<Int, Event>() {
     }
 
     override fun loadInitial(
-        params: LoadInitialParams<Int>,
+        params: LoadInitialParams<Long>,
         callback: LoadInitialCallback<Event>
     ) {
-        Log.d(TAG,"Fetching first page: $pageNumber")
-        initialLoadStateLiveData.postValue(Loading)
-        val showsDisposable = loadNews()
+        api.getArtistNews()
             .subscribeOn(Schedulers.io())
-            .doOnError { t: Throwable? -> Log.d(TAG, t!!.message) }
-            .subscribe {news -> news.data!!.events?.let {
-                onNewsFetched(it, callback) }
-            }
+            .observeOn(Schedulers.computation())
+            .subscribe(
+                {
+                    val events = getData(it)
+                    val position = events.size
+                    val totalCount = getTotalCount(it)
+                    callback.onResult(events, position, totalCount)
+                },
+                {
+                    Log.e(TAG, "Fetch events failed: ${it.localizedMessage}")
+                }
+            ).addTo(compositeDisposable)
+    }
 
-        compositeDisposable.add(showsDisposable)
+    private fun getData(response: EventsResponse?): MutableList<Event> {
+        return (response?.data?.events ?: emptyList()).toMutableList()
+    }
+
+    private fun getTotalCount(response: EventsResponse?): Int {
+        return (response?.data?.count ?: "0").toInt()
     }
 
     private fun onNewsFetched (events: List<Event>, callback: LoadInitialCallback<Event>) {
         initialLoadStateLiveData.postValue(Success)
-        pageNumber++
         callback.onResult(events)
     }
 
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Event>) {
-        this.loadParams = params
-        this.loadCallback = callback
-
-        Log.d(TAG, "Fetching next page: $pageNumber")
-        paginatedStateLiveData.postValue(Loading)
-        val showsDisposable = loadNews()
+    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Event>) {
+        api.getArtistNews(beforeEventId = params.key)
             .subscribeOn(Schedulers.io())
-            .doOnError { t: Throwable? -> Log.d(TAG, t!!.message) }
-            .subscribe {news -> news.data!!.events?.let {
-                onMoreShowsFetched(params, it, callback) }
-            }
-        compositeDisposable.add(showsDisposable)
+            .observeOn(Schedulers.computation())
+            .subscribe(
+                {
+                    val events = getData(it)
+                    callback.onResult(events)
+                },
+                {
+                    Log.e(TAG, "Fetch events failed: ${it.localizedMessage}")
+                }
+            ).addTo(compositeDisposable)
     }
 
-    private fun onMoreShowsFetched(params: LoadParams<Int>, events: List<Event>, callback: LoadCallback<Event>) {
-        initialLoadStateLiveData.postValue(Success)
-        pageNumber++
-        callback.onResult(events)
+
+    override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback <Event>) {
     }
 
-
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback <Event>) {
-    }
-
-   override fun getKey(item: Event): Int {
-        return pageNumber
+   override fun getKey(item: Event): Long {
+        return item.getBeforeLastIdEvent()
     }
 
     fun clear() {
         compositeDisposable.clear()
-        pageNumber = 1
-    }
-
-    fun getInitialLoadState() : MutableLiveData<NetworkState> {
-        return initialLoadStateLiveData
-    }
-
-    fun getPaginatedState() : MutableLiveData<NetworkState> {
-        return paginatedStateLiveData
-    }
-
-    fun retryPagination() {
-        loadAfter(loadParams, loadCallback)
     }
 }
