@@ -6,32 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.Illarionov.art.ArtistDataSourceFactory
+import com.Illarionov.art.NetworkState
 import com.Illarionov.art.R
 import com.Illarionov.art.config.PagedListConfig
 import com.Illarionov.art.network.ArtistRemoteDataSource
 import com.company.myartist.model.Event
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import io.reactivex.Scheduler
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
 
 class NewsViewModel(
-    artistDataSourceFactory: ArtistDataSourceFactory,
-    dataSource: ArtistRemoteDataSource,
-    backgroundScheduler: Scheduler ) :
-    BottomNavigationView.OnNavigationItemSelectedListener, ViewModel() {
+    var artistDataSourceFactory: ArtistDataSourceFactory,
+    var dataSource: ArtistRemoteDataSource
+) : BottomNavigationView.OnNavigationItemSelectedListener, ViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
-    val listOfEvents = MutableLiveData<List<Event>>() //todo для работы с постраничным адаптером нужно использовать LivePagedList
-    private var listOfPagination : LiveData<PagedList<Event>>
+    var eventsList : LiveData<PagedList<Event>> = PagedListConfig(artistDataSourceFactory).livePagedListBuilder
 
     init{
-        listOfPagination = PagedListConfig(artistDataSourceFactory).livePagedListBuilder
-
-        dataSource.loadNews()
-            .subscribeOn(backgroundScheduler)
-            .subscribe {listOfEvents.postValue(it.data?.events)}
-            .addTo(compositeDisposable)
+        dataSource = artistDataSourceFactory.create() as ArtistRemoteDataSource
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -43,13 +33,26 @@ class NewsViewModel(
         }
     }
 
-    override fun onCleared() {
-        compositeDisposable.dispose()
-        super.onCleared()
+    fun initialLoadState(): MutableLiveData<NetworkState> {
+        return dataSource.getInitialLoadState()
     }
 
+    fun paginationLoadState() : MutableLiveData<NetworkState> {
+        return dataSource.getPaginatedState()
+    }
 
+    fun getNews() : LiveData<PagedList<Event>> {
+        return eventsList
+    }
 
+    override fun onCleared() {
+        super.onCleared()
+        dataSource.clear()
+    }
+
+    fun retry() {
+        dataSource.retryPagination()
+    }
 }
 
 
