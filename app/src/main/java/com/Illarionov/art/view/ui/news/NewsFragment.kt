@@ -29,7 +29,7 @@ class NewsFragment : Fragment(){
             adapter = artistAdapter
             setHasFixedSize(true)
         }
-        viewModel.eventsList.observe(viewLifecycleOwner, Observer{artistAdapter.submitList(it)})
+        viewModel.eventsList.observe(this.viewLifecycleOwner, Observer{artistAdapter.submitList(it)})
     }
 
     override fun onCreateView(
@@ -42,20 +42,15 @@ class NewsFragment : Fragment(){
         return root
     }
 
-    private fun setupViewModel() {
-        viewModel = NewsViewModel(
-            ArtistRemoteDataSource()
-        )
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        artistAdapter = ArtistPagedListAdapter(NewsDiffUtilItemCallback(), onClickItemListener = object : OnClickItemListener {
+        artistAdapter = ArtistPagedListAdapter(NewsDiffUtilItemCallback(), object : OnClickItemListener {
             override fun onClickItem(id: String) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
-        setupViewModel()
+        viewModel = NewsViewModel(ArtistRemoteDataSource())
     }
 
     /*private fun setProgress(loadState: NetworkState) {
