@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageWork"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/works_fragment_work_width"
+        tools:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/titleWork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="Название работы" />
+
+    <ImageView
+        android:id="@+id/likeBtn"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_like"/>
+
+    <TextView
+        android:id="@+id/countWork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="100" />
+
+    <ImageView
+        android:id="@+id/saleBtn"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_sale" />
+
+    <ImageView
+        android:id="@+id/infoBtn"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_info_grey" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
