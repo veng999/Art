@@ -1,34 +1,20 @@
 package com.Illarionov.art.network
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
-import com.Illarionov.art.Loading
-import com.Illarionov.art.NetworkState
-import com.Illarionov.art.Success
 import com.Illarionov.art.rest_api.ArtistApiService
 import com.company.myartist.model.Event
 import com.company.myartist.model.response.EventsResponse
-import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 
-class ArtistRemoteDataSource() : ItemKeyedDataSource<Long, Event>() {
+class NewsRemoteDataSource() : ItemKeyedDataSource<Long, Event>() {
 
     private val api: ArtistApiService = ArtistApiService.create()
-    val initialLoadStateLiveData: MutableLiveData<NetworkState> = MutableLiveData()
-    val paginatedStateLiveData : MutableLiveData<NetworkState> = MutableLiveData()
     private val compositeDisposable = CompositeDisposable()
-    private val TAG = ArtistRemoteDataSource::class.java.simpleName
-    private lateinit var loadParams: LoadParams<Long>
-    private lateinit var loadCallback: LoadCallback<Event>
-
-
-    private fun loadNews (): Observable<EventsResponse> {
-        return api.getArtistNews()
-    }
+    private val TAG = NewsRemoteDataSource::class.java.simpleName
 
     override fun loadInitial(
         params: LoadInitialParams<Long>,
@@ -57,12 +43,6 @@ class ArtistRemoteDataSource() : ItemKeyedDataSource<Long, Event>() {
     private fun getTotalCount(response: EventsResponse?): Int {
         return (response?.data?.count ?: "0").toInt()
     }
-
-    private fun onNewsFetched (events: List<Event>, callback: LoadInitialCallback<Event>) {
-        initialLoadStateLiveData.postValue(Success)
-        callback.onResult(events)
-    }
-
 
     override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Event>) {
         api.getArtistNews(beforeEventId = params.key)

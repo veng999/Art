@@ -7,42 +7,67 @@
 
     <ImageView
         android:id="@+id/imageWork"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/works_fragment_work_width"
-        tools:background="@android:color/darker_gray" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="38dp"
+        tools:background="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/titleWork"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:paddingBottom="20dp"
+        android:maxLines="1"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/imageWork"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
         tools:text="Название работы" />
 
     <ImageView
         android:id="@+id/likeBtn"
         android:layout_width="16dp"
+        android:paddingStart="5dp"
         android:layout_height="16dp"
-        android:src="@drawable/ic_like"/>
+        android:src="@drawable/ic_like"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="like" />
 
     <TextView
         android:id="@+id/countWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/likeBtn"
+        tools:ignore="MissingConstraints"
         tools:text="100" />
 
     <ImageView
         android:id="@+id/saleBtn"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:src="@drawable/ic_sale" />
+        android:src="@drawable/ic_sale"
+        tools:ignore="MissingConstraints"
+        android:paddingEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/infoBtn"/>
 
     <ImageView
         android:id="@+id/infoBtn"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:src="@drawable/ic_info_grey" />
+        android:src="@drawable/ic_info_grey"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

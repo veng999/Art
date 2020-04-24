@@ -69,7 +69,7 @@ interface ArtistApiService {
             : Observable<CollectionResponce>
 
     @GET("works.search")
-    fun getWorks(@Query("count") count: Int = 10,
+    fun getWorks(@Query("count") count: Long = 10,
                  @Query("offset") offset: Int = 0,
                  @Query("order") order: String = "",
                  @Query("artist_id") artistId: Int = BuildConfig.ARTIST_ID,

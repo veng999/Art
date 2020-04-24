@@ -8,26 +8,28 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.Illarionov.art.R
-import com.Illarionov.art.network.ArtistRemoteDataSource
+import com.Illarionov.art.network.NewsRemoteDataSource
 import com.company.myartist.model.Event
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class NewsViewModel(
-    var dataSource: ArtistRemoteDataSource
+    /*var dataSource: ArtistRemoteDataSource*/
 ) : BottomNavigationView.OnNavigationItemSelectedListener, ViewModel() {
 
+    val dataSource = NewsRemoteDataSource()
+    val TAG = NewsViewModel::class.java.simpleName
     val eventsList = initializedEventsPagedListBuilder().build()
 
     fun initializedEventsPagedListBuilder(): LivePagedListBuilder<Long, Event> {
 
         val config = PagedList.Config.Builder()
-            .setPageSize(20)
             .setEnablePlaceholders(false)
+            .setPageSize(20)
             .build()
 
         val dataSourceFactory = object : DataSource.Factory<Long, Event>() {
             override fun create(): DataSource<Long, Event> {
-                return ArtistRemoteDataSource()
+                return NewsRemoteDataSource()
             }
 
         }
@@ -51,7 +53,7 @@ class NewsViewModel(
     override fun onCleared() {
         super.onCleared()
         dataSource.clear()
-        Log.d("TAG", "onCleadred")
+        Log.d(TAG, "onCleadred")
     }
 }
 

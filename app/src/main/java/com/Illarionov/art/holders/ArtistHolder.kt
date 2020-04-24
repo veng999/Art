@@ -1,7 +1,8 @@
-package com.Illarionov.art
+package com.Illarionov.art.holders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.Illarionov.art.OnClickItemListener
 import com.Illarionov.art.utils.DateUtils
 import com.company.myartist.model.Event
 import kotlinx.android.synthetic.main.view_artist_item.view.*
