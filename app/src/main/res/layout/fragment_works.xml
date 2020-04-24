@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:paddingTop="0dp"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp">
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--    Не нужно определять лишние аттрибуты-->
+<!--    android:paddingTop="0dp"-->
+<!--    android:layout_margin="8dp"-->
+<!--    app:cardCornerRadius="8dp">-->
 
 
     <androidx.recyclerview.widget.RecyclerView

@@ -25,7 +25,7 @@ class WorksFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2)
             adapter = worksAdapter
             setHasFixedSize(true)
-            addItemDecoration(ArtistItemDecoration(4))
+            addItemDecoration(ArtistItemDecoration(8))
         }
         viewModel.worksList.observe(this.viewLifecycleOwner, Observer{worksAdapter.submitList(it)})
     }

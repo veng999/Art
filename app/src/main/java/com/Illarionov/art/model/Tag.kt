@@ -5,8 +5,8 @@ data class Tag(
     val name: String?,
     val uri: String?,
     val _extended: String?,
-    val date: String?,
-    val data: Data?
+    val date: String?
+//    val data: Data? // с сервера приходит или объект Data, или null, или пустой массив
 ) {
 
     data class Data(

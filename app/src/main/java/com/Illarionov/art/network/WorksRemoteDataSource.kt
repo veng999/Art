@@ -15,6 +15,7 @@ class WorksRemoteDataSource : ItemKeyedDataSource<Long, Work>() {
     private val compositeDisposable = CompositeDisposable()
     private val TAG = WorksRemoteDataSource::class.java.simpleName
 
+    //todo список не подгружается по странично проверь запросы в логе и тот ли ты DataSource выбрал?
     override fun loadInitial(params: LoadInitialParams<Long>, callback: LoadInitialCallback<Work>) {
         api.getWorks()
             .subscribeOn(Schedulers.io())
@@ -59,7 +60,7 @@ class WorksRemoteDataSource : ItemKeyedDataSource<Long, Work>() {
     }
 
     override fun getKey(item: Work): Long {
-        return item.work_id!!.toLong()
+        return item.work_id!!.toLong() // ты серьезно хочешь чтобы приложение упало если id null
     }
 
     fun clear() {

@@ -12,7 +12,12 @@ import com.Illarionov.art.network.WorksRemoteDataSource
 import com.company.myartist.model.Work
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class WorksViewModel : ViewModel(), BottomNavigationView.OnNavigationItemSelectedListener {
+//ViewModel ничего не должна знать о виджетах и прочих компонентах с которыми взаимодействует user у
+//него другая задача, он должен реализовать получение данных от слоя model и выполнить некую бизнеслогику
+//class WorksViewModel : ViewModel(), BottomNavigationView.OnNavigationItemSelectedListener {
+//todo разберись по внимательней с компонентом Bottom Navigation Menu и компонентом навигации в андроидx
+//пишешь лишний код
+class WorksViewModel : ViewModel() {
 
     val dataSource = NewsRemoteDataSource()
     val TAG = WorksViewModel::class.java.simpleName
@@ -34,19 +39,18 @@ class WorksViewModel : ViewModel(), BottomNavigationView.OnNavigationItemSelecte
         return LivePagedListBuilder(dataSourceFactory, config)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_works -> {
-                return true
-            }
-            else -> false
-        }
-    }
+//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.menu_works -> {
+//                return true
+//            }
+//            else -> false
+//        }
+//    }
 
 
     override fun onCleared() {
         super.onCleared()
         dataSource.clear()
-        Log.d(TAG, "onCleadred")
     }
 }
