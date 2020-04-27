@@ -5,19 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-<!--    Если картинки будут приходить с разной шириной верстка поплывет,
-  избегай односторонние отступы, если нужно сделать расстояние от чего то лучше
-  использовать границы margin-->
-<!--    <ImageView-->
-<!--        android:id="@+id/imageWork"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="@dimen/works_fragment_work_width"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:paddingBottom="38dp"-->
-<!--        tools:background="@android:color/darker_gray"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        android:contentDescription="TODO" />-->
     <ImageView
         android:id="@+id/imageWork"
         android:layout_width="0dp"
@@ -27,28 +14,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-<!--  в результате ты не увидел картинки и влепил костыль для названия
- подкрасив фон в белый цвет ))
- ошбка еще в том что привязал текстовое поле к нижней границе родительского контейнера
- у тебя есть постоянная величина это высота изображения, она будет всегда такой какая бы
- картинка не прилетела, поэтому можно было привязывать к ее нижней границе,
-  центрировать текст не нужно, разные длины заголовков будут давать плавающую верстку,
-  тем более я тебе уже предустановленное значение ведь сброил не нужно было менять -->
-<!--    <TextView-->
-<!--        android:id="@+id/titleWork"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:ellipsize="end"-->
-<!--        android:paddingBottom="20dp"-->
-<!--        android:maxLines="1"-->
-<!--        android:textColor="@android:color/black"-->
-<!--        android:textSize="16sp"-->
-<!--        android:textAlignment="center"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/imageWork"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        tools:layout_editor_absoluteX="0dp"-->
-<!--        tools:text="Название работы" />-->
 
     <TextView
             android:id="@+id/titleWork"
@@ -64,19 +29,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Название работы" />
 
-<!--    Привязка иконок аналогично, нужно было привязать не к нижнему краю-->
-<!--    родительского контейнера а к нижнему краю надписи так как высота ее-->
-<!--    будет у всех элементов одинаковой мы ограничили надпись одной строчкой-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/likeBtn"-->
-<!--        android:layout_width="16dp"-->
-<!--        android:paddingStart="5dp"-->
-<!--        android:layout_height="16dp"-->
-<!--        android:src="@drawable/ic_like"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        tools:text="like" />-->
     <ImageView
         android:id="@+id/likeBtn"
         android:layout_width="16dp"
@@ -88,16 +40,6 @@
         app:layout_constraintBottom_toBottomOf="@id/countWork"
         tools:text="like" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/countWork"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:paddingStart="6dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toRightOf="@+id/likeBtn"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        tools:text="100" />-->
-
     <TextView
         android:id="@+id/countWork"
         android:layout_width="wrap_content"
@@ -106,16 +48,6 @@
         app:layout_constraintTop_toBottomOf="@id/titleWork"
         app:layout_constraintLeft_toRightOf="@id/likeBtn"
         tools:text="100" />
-
-<!--    <ImageView-->
-<!--        android:id="@+id/saleBtn"-->
-<!--        android:layout_width="16dp"-->
-<!--        android:layout_height="16dp"-->
-<!--        android:src="@drawable/ic_sale"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        android:paddingEnd="5dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintRight_toLeftOf="@+id/infoBtn"/>-->
 
     <ImageView
         android:id="@+id/saleBtn"
@@ -126,15 +58,6 @@
         app:layout_constraintTop_toBottomOf="@id/titleWork"
         app:layout_constraintRight_toLeftOf="@id/infoBtn"
         app:layout_constraintBottom_toBottomOf="@id/countWork"/>
-
-<!--    <ImageView-->
-<!--        android:id="@+id/infoBtn"-->
-<!--        android:layout_width="16dp"-->
-<!--        android:layout_height="16dp"-->
-<!--        android:src="@drawable/ic_info_grey"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
 
     <ImageView
         android:id="@+id/infoBtn"
