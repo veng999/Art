@@ -18,7 +18,7 @@ class WorksHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.apply {
             val sizeWork = itemView.context.resources.getDimension(R.dimen.works_fragment_work_width).toInt()
             val url = item?.media?.makeUrl(Media.MediaRatio.o, Media.MediaSide.x, sizeWork)
-            val imagePlaceholder = "#" + item?.colors?.middle
+            val imagePlaceholder = "#${item?.colors?.middle}"
 
             imageWork.into(url, imageWork, imagePlaceholder)
             val title = item?.name ?: "0"

@@ -10,20 +10,19 @@ import com.company.myartist.model.Work
 
 class WorksViewModel : ViewModel() {
 
-    val dataSource = NewsRemoteDataSource()
-    val TAG = WorksViewModel::class.java.simpleName
+    private val dataSource = NewsRemoteDataSource()
     val worksList = initializedEventsPagedListBuilder().build()
 
-    fun initializedEventsPagedListBuilder(): LivePagedListBuilder<Long, Work> {
+    private fun initializedEventsPagedListBuilder(): LivePagedListBuilder<Long, Work> {
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
-            .setPageSize(20)
+            .setPageSize(10)
             .build()
 
         val dataSourceFactory = object : DataSource.Factory<Long, Work>() {
             override fun create(): DataSource<Long, Work> {
-                return WorksRemoteDataSource()
+                return WorksRemoteDataSource() as DataSource<Long, Work>
             }
 
         }

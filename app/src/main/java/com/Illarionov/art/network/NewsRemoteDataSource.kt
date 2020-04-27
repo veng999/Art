@@ -31,7 +31,7 @@ class NewsRemoteDataSource() : ItemKeyedDataSource<Long, Event>() {
                     callback.onResult(events, position, totalCount)
                 },
                 {
-                    Log.e(TAG, "Fetch events failed: ${it.localizedMessage}")
+                    Log.e("loadInitial${TAG}", "Fetch events failed: ${it.localizedMessage}")
                 }
             ).addTo(compositeDisposable)
     }
@@ -54,7 +54,7 @@ class NewsRemoteDataSource() : ItemKeyedDataSource<Long, Event>() {
                     callback.onResult(events)
                 },
                 {
-                    Log.e(TAG, "Fetch events failed: ${it.localizedMessage}")
+                    Log.e("loadAfter${TAG}", "Fetch events failed: ${it.localizedMessage}")
                 }
             ).addTo(compositeDisposable)
     }
