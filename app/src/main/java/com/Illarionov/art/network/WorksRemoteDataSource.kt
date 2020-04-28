@@ -18,15 +18,13 @@ class WorksRemoteDataSource : PositionalDataSource<Work>() {
     override fun loadInitial(
         params: LoadInitialParams, callback: LoadInitialCallback<Work>
     ) {
-        api.getWorks()
+        api.getWorks(offset = 0)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
             .subscribe(
                 {
                     val works = getData(it)
-                    val position = works.size
-                    val totalCount = getTotalCount(it)
-                    callback.onResult(works, position, totalCount)
+                    callback.onResult(works, 0)
                 },
                 {
                     Log.e("loadInitial${TAG}", "Fetch events failed: ${it.localizedMessage}")
