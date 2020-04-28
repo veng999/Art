@@ -24,7 +24,7 @@ class NewsViewModel(
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
-            .setPageSize(20)
+            .setPageSize(10)
             .build()
 
         val dataSourceFactory = object : DataSource.Factory<Long, Event>() {

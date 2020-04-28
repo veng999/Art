@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_works.*
 
 class WorksFragment : Fragment() {
 
-    private val TAG = WorksFragment::class.java.simpleName
     private lateinit var worksAdapter: WorksPagedListAdapter
     private lateinit var viewModel: WorksViewModel
 

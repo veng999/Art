@@ -43,32 +43,14 @@ class WorksRemoteDataSource : PositionalDataSource<Work>() {
         return (response?.data?.count ?: "0").toInt()
     }
 
-    /*override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, Work>) {
-        api.getWorks(params.key)
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.computation())
-            .subscribe(
-                {
-                    val works = getData(it)
-                    callback.onResult(works, params.key + 1)
-                },
-                {
-                    Log.e(TAG, "Fetch events failed: ${it.localizedMessage}")
-                }
-            ).addTo(compositeDisposable)
-    }*/
-
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Work>) {
-        api.getWorks()
+        api.getWorks(offset = params.startPosition)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
             .subscribe(
                 {
                     val data = getData(it)
-                    val startPosition = params.startPosition
-                    val loadSize = params.loadSize
-                    val subList = data.subList(startPosition, loadSize - 1)
-                    callback.onResult(subList)
+                    callback.onResult(data)
                 },
                 {
                     Log.e("loadRange${TAG}", "Fetch events failed: ${it.localizedMessage}")
