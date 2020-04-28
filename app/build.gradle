@@ -23,6 +23,11 @@ android {
         buildConfigField "Integer", "ARTIST_ID", '739'
     }
 
+    sourceSets {
+        test {
+            resources.srcDirs += ['src/test/res']
+        }
+    }
 
     buildTypes {
         release {
