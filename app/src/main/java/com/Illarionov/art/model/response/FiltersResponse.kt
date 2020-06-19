@@ -1,7 +1,7 @@
 package com.company.myartist.model.response
 
 import com.company.myartist.model.Filter
-import com.company.myartist.model.Work
+import com.Illarionov.art.model.Work
 
 data class FiltersResponse(
     val data: Data?

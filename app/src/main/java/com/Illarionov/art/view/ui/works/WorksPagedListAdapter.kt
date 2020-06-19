@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.Illarionov.art.holders.ArtistHolder
 import com.Illarionov.art.R
 import com.Illarionov.art.holders.WorksHolder
-import com.company.myartist.model.Work
+import com.Illarionov.art.model.Work
+import com.Illarionov.art.model.WorkAndMedia
 
-class WorksPagedListAdapter (diffCallback: DiffUtil.ItemCallback<Work>
-): PagedListAdapter<Work, WorksHolder>(diffCallback)  {
+class WorksPagedListAdapter(
+    diffCallback: DiffUtil.ItemCallback<WorkAndMedia>
+): PagedListAdapter<WorkAndMedia, WorksHolder>(diffCallback)  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorksHolder {
         return WorksHolder(
@@ -20,6 +21,6 @@ class WorksPagedListAdapter (diffCallback: DiffUtil.ItemCallback<Work>
     }
 
     override fun onBindViewHolder(holder: WorksHolder, position: Int) {
-        holder.run { show(item = getItem(position))  }
+        holder.run { show(getItem(position))  }
     }
 }

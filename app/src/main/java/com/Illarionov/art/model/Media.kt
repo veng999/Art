@@ -1,16 +1,24 @@
 package com.company.myartist.model
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
+@Entity
 data class Media(
-    val media_id: String?,
-    val type: String?,
-    val user_id: String?,
-    val caption: String?,
-    val data: Data?,
-    val create_date: String?,
-    val use_type: String?,
-    val uri: String?,
-    val base_url: String?,
-    val _extended: String?
+    @PrimaryKey
+    val media_id: String = "",
+    val type: String? = null,
+    val user_id: String? = null,
+    val caption: String? = null,
+    @Embedded
+    val data: Data? = null,
+    val create_date: String? = null,
+    val use_type: String? = null,
+    val uri: String? = null,
+    val base_url: String? = null,
+    val _extended: String? = null
 ) {
     companion object {
         val sizes = arrayOf(
@@ -50,25 +58,30 @@ data class Media(
     }
 
     data class Data(
-        val version: String?,
-        val version_big: String?,
-        val version_orig: String?,
-        val sizes: Size?,
-        val x: String?,
-        val y: String?,
-        val ratio: String?,
-        val ext: String?,
-        val is_animated: String?
+        val version: String? = null,
+        val version_big: String? = null,
+        val version_orig: String? = null,
+        @Embedded
+        val sizes: Size? = null,
+        val x: String? = null,
+        val y: String? = null,
+        val ratio: String? = null,
+        val ext: String? = null,
+        @SerializedName("is_animated")
+        val isanimated: String? = null
     )
 
     data class Size(
-        val orig: SizeOrig?
+        @Embedded
+        val orig: SizeOrig? = null
     )
 
     data class SizeOrig(
-        val x: String?,
-        val y: String?,
-        val hash_file_name: String?
+        @SerializedName("x")
+        val x_: String? = null,
+        @SerializedName("y")
+        val y_: String? = null,
+        val hash_file_name: String? = null
     )
 
     enum class MediaRatio {

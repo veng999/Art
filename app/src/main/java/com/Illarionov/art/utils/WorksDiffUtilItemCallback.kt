@@ -1,7 +1,7 @@
 package com.Illarionov.art.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.company.myartist.model.Work
+import com.Illarionov.art.model.Work
 
 class WorksDiffUtilItemCallback : DiffUtil.ItemCallback<Work>() {
     override fun areItemsTheSame(oldItem: Work, newItem: Work): Boolean {

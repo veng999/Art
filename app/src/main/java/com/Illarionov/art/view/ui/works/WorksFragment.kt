@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.Illarionov.art.ArtistItemDecoration
 import com.Illarionov.art.R
+import com.Illarionov.art.model.WorkAndMedia
 import com.Illarionov.art.utils.WorksDiffUtilItemCallback
 import kotlinx.android.synthetic.main.fragment_works.*
 
 class WorksFragment : Fragment() {
 
     private lateinit var worksAdapter: WorksPagedListAdapter
-    private lateinit var viewModel: WorksViewModel
+    private val viewModel: WorksViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,7 +28,7 @@ class WorksFragment : Fragment() {
             setHasFixedSize(true)
             addItemDecoration(ArtistItemDecoration(8))
         }
-        viewModel.worksList.observe(this.viewLifecycleOwner, Observer{worksAdapter.submitList(it)})
+        viewModel.worksList.observe(this.viewLifecycleOwner, Observer { worksAdapter.submitList(it) })
     }
 
     override fun onCreateView(
@@ -41,14 +43,15 @@ class WorksFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         worksAdapter = WorksPagedListAdapter(
-            WorksDiffUtilItemCallback() /*object : OnClickItemListener {
+            WorksDiffUtilItemCallback()  as DiffUtil.ItemCallback<WorkAndMedia>/*object : OnClickItemListener {
             override fun onClickItem(id: String) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         }*/)
-        viewModel = ViewModelProvider(this)[WorksViewModel::class.java]
         /*viewModel = NewsViewModel(ArtistRemoteDataSource())*/
     }
+
+
 
     /*private fun setProgress(loadState: NetworkState) {
         when (loadState) {

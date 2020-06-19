@@ -1,11 +1,16 @@
 package com.company.myartist.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Tag(
-    val tag_id: String?,
-    val name: String?,
-    val uri: String?,
-    val _extended: String?,
-    val date: String?
+    @PrimaryKey
+    val tag_id: String = "",
+    val name: String? = null,
+    val uri: String? = null,
+    val _extended: String? = null,
+    val date: String? = null
 //    val data: Data? // с сервера приходит или объект Data, или null, или пустой массив
 ) {
 

@@ -1,5 +1,6 @@
 package com.company.myartist.model.response
 
+import com.Illarionov.art.model.Work
 import com.company.myartist.model.*
 import com.company.myartist.model.Collection
 
@@ -20,50 +21,50 @@ data class WorksResponse(
         val materials: List<Material>?,
         val tags: List<Tag>?
     ) {
-        fun getArtWorks(): List<Work> {
-            val _works = works ?: emptyList()
-            _works.forEach {
-                it.media = this.media?.firstOrNull { media -> it.media_id == media.media_id }
-                it.techniques = findTechnicsByWork(it)
-                it.styles = findStylesByWork(it)
-                it.materials = findMaterialsByWork(it)
-                it.genres = findGenresByWork(it)
-                it.tags = findTagsByWork(it)
-                it.collections = findCollectionsByWork(it)
-            }
-            return _works
-        }
+//        fun getArtWorks(): List<Work> {
+//            val _works = works ?: emptyList()
+//            _works.forEach {
+//                it.media = this.media?.firstOrNull { media -> it.media_id == media.media_id }
+//                it.techniques = findTechnicsByWork(it)
+//                it.styles = findStylesByWork(it)
+//                it.materials = findMaterialsByWork(it)
+//                it.genres = findGenresByWork(it)
+//                it.tags = findTagsByWork(it)
+//                it.collections = findCollectionsByWork(it)
+//            }
+//            return _works
+//        }
 
-        private fun findTechnicsByWork(work: Work): List<Technique>? {
-            return techniques?.filter {
-                (work.technique_ids ?: emptyList()).contains(it.technique_id ?: "")
-            }
-        }
-
-        private fun findStylesByWork(work: Work): List<Style>? {
-            return styles?.filter { (work.style_ids ?: emptyList()).contains(it.style_id ?: "") }
-        }
-
-        private fun findMaterialsByWork(work: Work): List<Material>? {
-            return materials?.filter {
-                (work.material_ids ?: emptyList()).contains(it.material_id ?: "")
-            }
-        }
-
-        private fun findGenresByWork(work: Work): List<Genre>? {
-            return genres?.filter { (work.genre_ids ?: emptyList()).contains(it.genre_id ?: "") }
-        }
-
-        private fun findTagsByWork(work: Work): List<Tag>? {
-            return tags?.filter { tag ->
-                (work.tags ?: emptyList()).map { it.tag_id }.contains(tag.tag_id ?: "")
-            }
-        }
-
-        private fun findCollectionsByWork(work: Work): List<Collection>? {
-            return sets?.filter { collection ->
-                (work.aset_ids ?: emptyList()).contains(collection.set_id ?: "")
-            }
-        }
+//        private fun findTechnicsByWork(work: Work): List<Technique>? {
+//            return techniques?.filter {
+//                (work.technique_ids ?: emptyList()).contains(it.technique_id ?: "")
+//            }
+//        }
+//
+//        private fun findStylesByWork(work: Work): List<Style>? {
+//            return styles?.filter { (work.style_ids ?: emptyList()).contains(it.style_id ?: "") }
+//        }
+//
+//        private fun findMaterialsByWork(work: Work): List<Material>? {
+//            return materials?.filter {
+//                (work.material_ids ?: emptyList()).contains(it.material_id ?: "")
+//            }
+//        }
+//
+//        private fun findGenresByWork(work: Work): List<Genre>? {
+//            return genres?.filter { (work.genre_ids ?: emptyList()).contains(it.genre_id ?: "") }
+//        }
+//
+//        private fun findTagsByWork(work: Work): List<Tag>? {
+//            return tags?.filter { tag ->
+//                (work.tags ?: emptyList()).map { it.tag_id }.contains(tag.tag_id ?: "")
+//            }
+//        }
+//
+//        private fun findCollectionsByWork(work: Work): List<Collection>? {
+//            return sets?.filter { collection ->
+//                (work.aset_ids ?: emptyList()).contains(collection.set_id ?: "")
+//            }
+//        }
     }
 }

@@ -1,11 +1,16 @@
 package com.company.myartist.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Technique(
-    val technique_id: String?,
-    val media_id: String?,
-    val name: String?,
-    val description: String?,
-    val uri: String?,
-    val _extended: String?,
-    val cnt_works: String?
+    @PrimaryKey
+    val technique_id: String = "",
+    val media_id: String? = null,
+    val name: String? = null,
+    val description: String? = null,
+    val uri: String? = null,
+    val _extended: String? = null,
+    val cnt_works: String? = null
 )

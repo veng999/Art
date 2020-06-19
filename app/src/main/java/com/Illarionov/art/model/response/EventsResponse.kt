@@ -1,5 +1,6 @@
 package com.company.myartist.model.response
 
+import com.Illarionov.art.model.Work
 import com.company.myartist.model.*
 
 data class EventsResponse(
@@ -21,22 +22,22 @@ data class EventsResponse(
         val tags: List<Tag>?
     ) {
 
-        fun getNewsEvents(): List<Event> {
-            val _events = events ?: emptyList()
-            _events.forEach {
-                it.content = it.attaches?.mapNotNull { makeInstanceAttachByUri(it.uri ?: "") }
-            }
-            return _events
-        }
+//        fun getNewsEvents(): List<Event> {
+//            val _events = events ?: emptyList()
+//            _events.forEach {
+//                it.content = it.attaches?.mapNotNull { makeInstanceAttachByUri(it.uri ?: "") }
+//            }
+//            return _events
+//        }
 
-        private fun makeInstanceAttachByUri(uri: String): Any? {
-            return when {
-                uri.startsWith("topic") -> findTopicByUri(uri)
-                uri.startsWith("work") -> findWorkByUri(uri)
-                uri.startsWith("exposition") -> findExpositionByUri(uri)
-                else -> null
-            }
-        }
+//        private fun makeInstanceAttachByUri(uri: String): Any? {
+//            return when {
+//                uri.startsWith("topic") -> findTopicByUri(uri)
+//                uri.startsWith("work") -> findWorkByUri(uri)
+//                uri.startsWith("exposition") -> findExpositionByUri(uri)
+//                else -> null
+//            }
+//        }
 
         private fun findTopicByUri(uri: String): Topic? {
             return (topics ?: emptyList()).firstOrNull { it.uri == uri }?.apply {
@@ -44,16 +45,16 @@ data class EventsResponse(
             }
         }
 
-        private fun findWorkByUri(uri: String): Work? {
-            return (works ?: emptyList()).firstOrNull { it.uri == uri }?.apply {
-                media = this@Data.media?.firstOrNull { it.media_id == media_id }
-                techniques = findTechnicsByWork(this)
-                styles = findStylesByWork(this)
-                materials = findMaterialsByWork(this)
-                genres = findGenresByWork(this)
-                tags = findTagsByWork(this)
-            }
-        }
+//        private fun findWorkByUri(uri: String): Work? {
+//            return (works ?: emptyList()).firstOrNull { it.uri == uri }?.apply {
+//                media = this@Data.media?.firstOrNull { it.media_id == media_id }
+//                techniques = findTechnicsByWork(this)
+//                styles = findStylesByWork(this)
+//                materials = findMaterialsByWork(this)
+//                genres = findGenresByWork(this)
+//                tags = findTagsByWork(this)
+//            }
+//        }
 
         private fun findTechnicsByWork(work: Work): List<Technique>? {
             return techniques?.filter {

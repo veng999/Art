@@ -3,13 +3,13 @@ package com.Illarionov.art.network
 import android.util.Log
 import androidx.paging.PositionalDataSource
 import com.Illarionov.art.rest_api.ArtistApiService
-import com.company.myartist.model.Work
+import com.Illarionov.art.model.Work
 import com.company.myartist.model.response.WorksResponse
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
-class WorksRemoteDataSource : PositionalDataSource<Work>() {
+/*class WorksRemoteDataSource : PositionalDataSource<Work>() {
 
     private val api: ArtistApiService = ArtistApiService.create()
     private val compositeDisposable = CompositeDisposable()
@@ -59,5 +59,5 @@ class WorksRemoteDataSource : PositionalDataSource<Work>() {
     fun clear() {
         compositeDisposable.clear()
     }
-}
+}*/
 
