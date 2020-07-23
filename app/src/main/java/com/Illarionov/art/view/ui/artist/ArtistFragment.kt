@@ -21,11 +21,11 @@ class ArtistFragment : Fragment() {
     ): View? {
         notificationsViewModel =
             ViewModelProviders.of(this).get(ArtistViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_artist, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        return inflater.inflate(R.layout.fragment_artist, container, false)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
     }
 }
