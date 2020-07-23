@@ -18,4 +18,9 @@
         android:label="Работы"
         tools:layout="@layout/fragment_works" />
 
+    <fragment
+        android:id="@+id/menu_artist"
+        android:name="com.Illarionov.art.view.ui.artist.ArtistFragment"
+        tools:layout="@layout/fragment_works" />
+
 </navigation>
