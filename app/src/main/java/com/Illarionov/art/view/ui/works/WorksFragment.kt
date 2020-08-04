@@ -7,16 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import com.Illarionov.art.ArtistItemDecoration
 import com.Illarionov.art.R
 import com.Illarionov.art.utils.WorksDiffUtilItemCallback
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_works.*
+import navigation.FragmentNavigation
+import navigation.NavigationGraph
 
-class WorksFragment : Fragment() {
+class WorksFragment : Fragment(), FragmentNavigation {
 
     private lateinit var worksAdapter: WorksPagedListAdapter
     private lateinit var viewModel: WorksViewModel
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +32,7 @@ class WorksFragment : Fragment() {
             setHasFixedSize(true)
             addItemDecoration(ArtistItemDecoration(8))
         }
+        navigateTo()
         viewModel.worksList.observe(this.viewLifecycleOwner, Observer{worksAdapter.submitList(it)})
     }
 
@@ -34,7 +41,6 @@ class WorksFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_works, container, false)
     }
 
@@ -46,6 +52,7 @@ class WorksFragment : Fragment() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         }*/)
+        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
         viewModel = ViewModelProvider(this)[WorksViewModel::class.java]
         /*viewModel = NewsViewModel(ArtistRemoteDataSource())*/
     }
@@ -61,5 +68,31 @@ class WorksFragment : Fragment() {
         }
     }*/
 
+    override fun navigateTo() {
+        val options = navOptions {
+            anim {
+                enter = R.anim.slide_in_right
+                exit = R.anim.slide_out_left
+                popEnter = R.anim.slide_in_left
+                popExit = R.anim.slide_out_right
+            }
+        }
 
+        bottomNavigationView.apply {
+            setOnNavigationItemSelectedListener {
+                when (it) {
+                    this.menu.findItem(R.id.menu_newsFeed) -> {
+                        findNavController().navigate(NavigationGraph.Action.to_menu_newsFeed, null, options)
+                        it.isChecked = true
+                    }
+
+                    this.menu.findItem(R.id.menu_artist) -> {
+                        findNavController().navigate(NavigationGraph.Action.to_menu_artist, null, options)
+                        it.isChecked = true
+                    }
+                }
+                false
+            }
+        }
+    }
 }

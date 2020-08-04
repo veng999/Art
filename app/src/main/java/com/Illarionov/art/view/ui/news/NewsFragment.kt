@@ -7,17 +7,27 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.Illarionov.art.utils.NewsDiffUtilItemCallback
 import com.Illarionov.art.R
+import com.Illarionov.art.R.anim.*
+import com.Illarionov.art.R.id.menu_artist
+import com.Illarionov.art.R.id.menu_works
+import com.Illarionov.art.R.layout.fragment_news_feed
+import com.Illarionov.art.utils.NewsDiffUtilItemCallback
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_news_feed.view.*
+import navigation.FragmentNavigation
+import navigation.NavigationGraph.Action.to_menu_artist
+import navigation.NavigationGraph.Action.to_menu_works
 
-class NewsFragment : Fragment(){
+class NewsFragment : Fragment(), FragmentNavigation {
 
-    private val TAG = NewsFragment::class.java.simpleName
     private lateinit var newsAdapter: ArtistPagedListAdapter
     private lateinit var viewModel: NewsViewModel
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +36,8 @@ class NewsFragment : Fragment(){
             adapter = newsAdapter
             setHasFixedSize(true)
         }
+
+        navigateTo()
         viewModel.eventsList.observe(this.viewLifecycleOwner, Observer{newsAdapter.submitList(it)})
     }
 
@@ -34,8 +46,7 @@ class NewsFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_news_feed, container, false)
+        return inflater.inflate(fragment_news_feed, container, false)
     }
 
 
@@ -47,6 +58,7 @@ class NewsFragment : Fragment(){
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         }*/)
+        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
         viewModel = ViewModelProvider(this)[NewsViewModel::class.java]
         /*viewModel = NewsViewModel(ArtistRemoteDataSource())*/
     }
@@ -61,5 +73,32 @@ class NewsFragment : Fragment(){
             is Loading -> progress.visibility = View.GONE
         }
     }*/
+
+    override fun navigateTo() {
+        val options = navOptions {
+            anim {
+                enter = slide_in_right
+                exit = slide_out_left
+                popEnter = slide_in_left
+                popExit = slide_out_right
+            }
+        }
+
+        bottomNavigationView.apply {
+            setOnNavigationItemSelectedListener {
+                when (it) {
+                    this.menu.findItem(menu_works) -> {
+                        findNavController().navigate(to_menu_works, null, options)
+                        it.isChecked = true
+                    }
+                    this.menu.findItem(menu_artist) -> {
+                        findNavController().navigate(to_menu_artist, null, options)
+                        it.isChecked = true
+                    }
+                }
+                false
+            }
+        }
+    }
 }
 
