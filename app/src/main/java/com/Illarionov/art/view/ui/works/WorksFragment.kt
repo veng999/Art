@@ -18,6 +18,9 @@ import kotlinx.android.synthetic.main.fragment_works.*
 import navigation.FragmentNavigation
 import navigation.NavigationGraph
 
+private const val SPAN_COUNT = 2
+private const val ARTIST_ITEM_DECORATION_OFFSET = 8
+
 class WorksFragment : Fragment(), FragmentNavigation {
 
     private lateinit var worksAdapter: WorksPagedListAdapter
@@ -27,10 +30,10 @@ class WorksFragment : Fragment(), FragmentNavigation {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         works_recycler_view.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(context, SPAN_COUNT)
             adapter = worksAdapter
             setHasFixedSize(true)
-            addItemDecoration(ArtistItemDecoration(8))
+            addItemDecoration(ArtistItemDecoration(ARTIST_ITEM_DECORATION_OFFSET))
         }
         navigateTo()
         viewModel.worksList.observe(this.viewLifecycleOwner, Observer{worksAdapter.submitList(it)})
@@ -46,15 +49,9 @@ class WorksFragment : Fragment(), FragmentNavigation {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        worksAdapter = WorksPagedListAdapter(
-            WorksDiffUtilItemCallback() /*object : OnClickItemListener {
-            override fun onClickItem(id: String) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        }*/)
+        worksAdapter = WorksPagedListAdapter(WorksDiffUtilItemCallback())
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
         viewModel = ViewModelProvider(this)[WorksViewModel::class.java]
-        /*viewModel = NewsViewModel(ArtistRemoteDataSource())*/
     }
 
     /*private fun setProgress(loadState: NetworkState) {

@@ -16,11 +16,12 @@ class WorksHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun show(item: Work?, listener: OnClickItemListener? = null) {
         itemView.apply {
-            val sizeWork = itemView.context.resources.getDimension(R.dimen.works_fragment_work_width).toInt()
+            val sizeWork =
+                itemView.context.resources.getDimension(R.dimen.works_fragment_work_width).toInt()
             val url = item?.media?.makeUrl(Media.MediaRatio.o, Media.MediaSide.x, sizeWork)
             val imagePlaceholder = "#${item?.colors?.middle}"
 
-            imageWork.into(url, imageWork, imagePlaceholder)
+            into(url, imageWork, imagePlaceholder)
             val title = item?.name ?: "0"
             titleWork.text = title
 
@@ -30,6 +31,10 @@ class WorksHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 }
 
-private fun ImageView.into(url: String?, imageView: ImageView?, imagePlaceholder: String? = "#FFFFFF") {
+private fun into(
+    url: String?,
+    imageView: ImageView?,
+    imagePlaceholder: String? = "#FFFFFF"
+) {
     Picasso.get().load(url).placeholder(ColorDrawable(Color.parseColor(imagePlaceholder))).into(imageView)
 }

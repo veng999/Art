@@ -1,6 +1,9 @@
 package com.Illarionov.art.view.ui.artist
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +16,15 @@ import com.Illarionov.art.R.anim.*
 import com.Illarionov.art.R.id.bottom_navigation_view
 import com.Illarionov.art.R.id.menu_works
 import com.Illarionov.art.R.layout.fragment_artist
+import com.Illarionov.art.utils.SpanUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.fragment_artist.*
 import navigation.FragmentNavigation
 import navigation.NavigationGraph.Action.to_menu_newsFeed
 import navigation.NavigationGraph.Action.to_menu_works
+
+private const val START_BOLD_SYMBOL = 0
+private const val END_BOLD_SYMBOL = 25
 
 class ArtistFragment : Fragment(), FragmentNavigation {
 
@@ -25,6 +33,15 @@ class ArtistFragment : Fragment(), FragmentNavigation {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val spannableString = SpanUtils.setSpan(
+            artist_info.text.toString(),
+            StyleSpan(Typeface.BOLD),
+            START_BOLD_SYMBOL,
+            END_BOLD_SYMBOL,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        artist_info.text = spannableString
         navigateTo()
     }
 
@@ -55,15 +72,14 @@ class ArtistFragment : Fragment(), FragmentNavigation {
 
         bottomNavigationView.apply {
             setOnNavigationItemSelectedListener {
+                it.isChecked = true
                 when (it) {
                     this.menu.findItem(menu_works) -> {
                         findNavController().navigate(to_menu_works, null, options)
-                        it.isChecked = true
                     }
 
                     this.menu.findItem(R.id.menu_newsFeed) -> {
                         findNavController().navigate(to_menu_newsFeed, null, options)
-                        it.isChecked = true
                     }
                 }
                 false

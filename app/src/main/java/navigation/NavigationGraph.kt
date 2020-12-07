@@ -1,6 +1,7 @@
 package navigation
 
 object NavigationGraph {
+    @Volatile
     var id_counter = 1
 
     val id = id_counter++

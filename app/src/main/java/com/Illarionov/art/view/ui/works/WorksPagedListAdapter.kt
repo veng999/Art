@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.Illarionov.art.holders.ArtistHolder
 import com.Illarionov.art.R
 import com.Illarionov.art.holders.WorksHolder
 import com.company.myartist.model.Work

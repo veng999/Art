@@ -43,20 +43,26 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/artist_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
             android:layout_margin="@dimen/text_margin"
-            android:text="@string/large_text">
+            android:text="@string/biography">
         </TextView>
 
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:lineSpacingExtra="4sp"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|center"
+        app:layout_anchorGravity="bottom|end"
+        app:showMotionSpec="@anim/fade_in"
         android:src="@drawable/ic_add_black_24dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

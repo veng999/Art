@@ -43,7 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.menu_newsFeed, R.id.menu_artist, R.id.menu_works, R.id.menu_more
+                R.id.menu_newsFeed,
+                R.id.menu_artist,
+                R.id.menu_works,
+                R.id.menu_more
             )
         )
 
@@ -114,9 +117,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
+    override fun onSupportNavigateUp() = navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+
 
     private fun setupBottomNavMenu(navController: NavController) {
         bottomNavView = findViewById(R.id.bottom_navigation_view)
