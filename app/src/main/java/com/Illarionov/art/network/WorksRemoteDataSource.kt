@@ -3,13 +3,17 @@ package com.Illarionov.art.network
 import android.util.Log
 import androidx.paging.PositionalDataSource
 import com.Illarionov.art.rest_api.ArtistApiService
+import com.Illarionov.art.storage.WorkDao
+import com.Illarionov.art.storage.WorkEntity
 import com.company.myartist.model.Work
 import com.company.myartist.model.response.WorksResponse
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
-class WorksRemoteDataSource : PositionalDataSource<Work>() {
+class WorksRemoteDataSource(private val dao: WorkDao) : PositionalDataSource<Work>() {
 
     private val api: ArtistApiService = ArtistApiService.create()
     private val compositeDisposable = CompositeDisposable()
@@ -24,6 +28,9 @@ class WorksRemoteDataSource : PositionalDataSource<Work>() {
             .subscribe(
                 {
                     val works = getData(it)
+                    MainScope().launch {
+                        dao.saveWorks(WorkEntity(it.data?.works))
+                    }
                     callback.onResult(works, 0)
                 },
                 {
@@ -32,14 +39,11 @@ class WorksRemoteDataSource : PositionalDataSource<Work>() {
             ).addTo(compositeDisposable)
     }
 
-    private fun getData(response: WorksResponse?): MutableList<Work> {
-        return (response?.data?.getArtWorks() ?: emptyList()).toMutableList()
-    }
+    private fun getData(response: WorksResponse?) =
+         (response?.data?.getArtWorks() ?: emptyList()).toMutableList()
 
-
-    private fun getTotalCount(response: WorksResponse?): Int {
-        return (response?.data?.count ?: "0").toInt()
-    }
+    private fun getTotalCount(response: WorksResponse?) =
+         (response?.data?.count ?: "0").toInt()
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Work>) {
         api.getWorks(offset = params.startPosition)
@@ -48,6 +52,9 @@ class WorksRemoteDataSource : PositionalDataSource<Work>() {
             .subscribe(
                 {
                     val data = getData(it)
+                    MainScope().launch {
+                        dao.saveWorks(WorkEntity(it.data?.works))
+                    }
                     callback.onResult(data)
                 },
                 {

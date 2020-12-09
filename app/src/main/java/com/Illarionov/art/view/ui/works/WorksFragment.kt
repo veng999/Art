@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import com.Illarionov.art.ArtistItemDecoration
 import com.Illarionov.art.R
+import com.Illarionov.art.extensions.factory
+import com.Illarionov.art.extensions.observe
 import com.Illarionov.art.utils.WorksDiffUtilItemCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_works.*
@@ -24,7 +25,7 @@ private const val ARTIST_ITEM_DECORATION_OFFSET = 8
 class WorksFragment : Fragment(), FragmentNavigation {
 
     private lateinit var worksAdapter: WorksPagedListAdapter
-    private lateinit var viewModel: WorksViewModel
+    private val viewModel: WorksViewModel by viewModels{ factory }
     private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,22 +37,22 @@ class WorksFragment : Fragment(), FragmentNavigation {
             addItemDecoration(ArtistItemDecoration(ARTIST_ITEM_DECORATION_OFFSET))
         }
         navigateTo()
-        viewModel.worksList.observe(this.viewLifecycleOwner, Observer{worksAdapter.submitList(it)})
+        observe(viewModel.worksList){
+            worksAdapter.submitList(it)
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_works, container, false)
-    }
+    ) = inflater.inflate(R.layout.fragment_works, container, false)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         worksAdapter = WorksPagedListAdapter(WorksDiffUtilItemCallback())
         bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
-        viewModel = ViewModelProvider(this)[WorksViewModel::class.java]
     }
 
     /*private fun setProgress(loadState: NetworkState) {

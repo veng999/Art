@@ -1,32 +1,29 @@
 package com.Illarionov.art.view.ui.works
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.Illarionov.art.factories.WorksDataSourceFactory
 import com.Illarionov.art.network.NewsRemoteDataSource
-import com.Illarionov.art.network.WorksRemoteDataSource
+import com.Illarionov.art.storage.WorkDao
 import com.company.myartist.model.Work
 
-class WorksViewModel : ViewModel() {
+class WorksViewModel(private val dao: WorkDao) : ViewModel() {
 
     private val dataSource = NewsRemoteDataSource()
-    val worksList = initializedEventsPagedListBuilder().build()
+    val worksList = initializedEventsPagedListBuilder()
 
-    private fun initializedEventsPagedListBuilder(): LivePagedListBuilder<Long, Work> {
+    private fun initializedEventsPagedListBuilder(): LiveData<PagedList<Work>> {
 
         val config = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
             .setPageSize(10)
             .build()
 
-        val dataSourceFactory = object : DataSource.Factory<Long, Work>() {
-            override fun create(): DataSource<Long, Work> {
-                return WorksRemoteDataSource() as DataSource<Long, Work>
-            }
+        val dataSourceFactory = WorksDataSourceFactory(dao)
 
-        }
-        return LivePagedListBuilder(dataSourceFactory, config)
+        return LivePagedListBuilder(dataSourceFactory, config).build()
     }
 
     override fun onCleared() {

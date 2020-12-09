@@ -76,10 +76,12 @@ class ArtistFragment : Fragment(), FragmentNavigation {
                 when (it) {
                     this.menu.findItem(menu_works) -> {
                         findNavController().navigate(to_menu_works, null, options)
+                        it.isChecked = true
                     }
 
                     this.menu.findItem(R.id.menu_newsFeed) -> {
                         findNavController().navigate(to_menu_newsFeed, null, options)
+                        it.isChecked = true
                     }
                 }
                 false

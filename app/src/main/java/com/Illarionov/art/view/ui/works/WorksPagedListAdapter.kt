@@ -11,14 +11,10 @@ import com.company.myartist.model.Work
 class WorksPagedListAdapter (diffCallback: DiffUtil.ItemCallback<Work>
 ): PagedListAdapter<Work, WorksHolder>(diffCallback)  {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorksHolder {
-        return WorksHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.view_work_item, parent, false)
-        )
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        WorksHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.view_work_item, parent, false))
 
-    override fun onBindViewHolder(holder: WorksHolder, position: Int) {
+    override fun onBindViewHolder(holder: WorksHolder, position: Int) =
         holder.run { show(item = getItem(position))  }
-    }
 }

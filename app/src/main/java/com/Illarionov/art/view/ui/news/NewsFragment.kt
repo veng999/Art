@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -16,6 +15,7 @@ import com.Illarionov.art.R.anim.*
 import com.Illarionov.art.R.id.menu_artist
 import com.Illarionov.art.R.id.menu_works
 import com.Illarionov.art.R.layout.fragment_news_feed
+import com.Illarionov.art.extensions.observe
 import com.Illarionov.art.utils.NewsDiffUtilItemCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_news_feed.view.*
@@ -38,7 +38,9 @@ class NewsFragment : Fragment(), FragmentNavigation {
         }
 
         navigateTo()
-        viewModel.eventsList.observe(this.viewLifecycleOwner, Observer{newsAdapter.submitList(it)})
+        observe(viewModel.eventsList){
+            newsAdapter.submitList(it)
+        }
     }
 
     override fun onCreateView(
