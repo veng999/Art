@@ -6,10 +6,10 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.Illarionov.art.factories.WorksDataSourceFactory
 import com.Illarionov.art.network.NewsRemoteDataSource
-import com.Illarionov.art.storage.WorkDao
+import com.Illarionov.art.storage.DaoInterface
 import com.company.myartist.model.Work
 
-class WorksViewModel(private val dao: WorkDao) : ViewModel() {
+class WorksViewModel(private val dao: DaoInterface) : ViewModel() {
 
     private val dataSource = NewsRemoteDataSource()
     val worksList = initializedEventsPagedListBuilder()

@@ -17,7 +17,7 @@ import com.Illarionov.art.utils.WorksDiffUtilItemCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_works.*
 import navigation.FragmentNavigation
-import navigation.NavigationGraph
+import navigation.NavigationConstants
 
 private const val SPAN_COUNT = 2
 private const val ARTIST_ITEM_DECORATION_OFFSET = 8
@@ -80,12 +80,12 @@ class WorksFragment : Fragment(), FragmentNavigation {
             setOnNavigationItemSelectedListener {
                 when (it) {
                     this.menu.findItem(R.id.menu_newsFeed) -> {
-                        findNavController().navigate(NavigationGraph.Action.to_menu_newsFeed, null, options)
+                        findNavController().navigate(NavigationConstants.Action.to_menu_newsFeed, null, options)
                         it.isChecked = true
                     }
 
                     this.menu.findItem(R.id.menu_artist) -> {
-                        findNavController().navigate(NavigationGraph.Action.to_menu_artist, null, options)
+                        findNavController().navigate(NavigationConstants.Action.to_menu_artist, null, options)
                         it.isChecked = true
                     }
                 }

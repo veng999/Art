@@ -20,8 +20,8 @@ import com.Illarionov.art.utils.NewsDiffUtilItemCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_news_feed.view.*
 import navigation.FragmentNavigation
-import navigation.NavigationGraph.Action.to_menu_artist
-import navigation.NavigationGraph.Action.to_menu_works
+import navigation.NavigationConstants.Action.to_menu_artist
+import navigation.NavigationConstants.Action.to_menu_works
 
 class NewsFragment : Fragment(), FragmentNavigation {
 

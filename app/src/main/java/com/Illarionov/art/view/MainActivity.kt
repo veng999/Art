@@ -15,20 +15,28 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.Illarionov.art.R
+import com.Illarionov.art.view.ui.tasks.AddTaskFragment
+import com.Illarionov.art.view.ui.tasks.TaskListFragment
 import com.Illarionov.art.view.ui.artist.ArtistFragment
 import com.Illarionov.art.view.ui.news.NewsFragment
 import com.Illarionov.art.view.ui.works.WorksFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import navigation.NavigationGraph
-import navigation.NavigationGraph.Action.to_menu_artist
-import navigation.NavigationGraph.Action.to_menu_newsFeed
-import navigation.NavigationGraph.Action.to_menu_works
-import navigation.NavigationGraph.Args.menu_artist_id
-import navigation.NavigationGraph.Args.menu_newsFeed_id
-import navigation.NavigationGraph.Args.menu_works_id
-import navigation.NavigationGraph.Destination.artist
-import navigation.NavigationGraph.Destination.newsFeed
-import navigation.NavigationGraph.Destination.works
+import navigation.NavigationConstants
+import navigation.NavigationConstants.Action.to_add_task_fragment
+import navigation.NavigationConstants.Action.to_menu_artist
+import navigation.NavigationConstants.Action.to_menu_newsFeed
+import navigation.NavigationConstants.Action.to_menu_works
+import navigation.NavigationConstants.Action.to_task_list_fragment
+import navigation.NavigationConstants.Args.add_task_fragment
+import navigation.NavigationConstants.Args.menu_artist_id
+import navigation.NavigationConstants.Args.menu_newsFeed_id
+import navigation.NavigationConstants.Args.menu_works_id
+import navigation.NavigationConstants.Args.task_list_fragmen
+import navigation.NavigationConstants.Destination.addTaskFragment
+import navigation.NavigationConstants.Destination.artist
+import navigation.NavigationConstants.Destination.newsFeed
+import navigation.NavigationConstants.Destination.taskListFragment
+import navigation.NavigationConstants.Destination.works
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController.apply {
             graph = createGraph(
-                NavigationGraph.id,
+                NavigationConstants.id,
                 startDestination = newsFeed
             ) {
                 fragment<WorksFragment>(works) {
@@ -75,13 +83,15 @@ class MainActivity : AppCompatActivity() {
                     action(to_menu_works) {
                         destinationId = works
                     }
+                    action(to_add_task_fragment){
+                        destinationId = addTaskFragment
+                    }
                     action(to_menu_newsFeed) {
                         destinationId = newsFeed
                     }
                     argument(menu_artist_id) {
                         type = StringType
                     }
-
                 }
 
                 fragment<NewsFragment>(newsFeed) {
@@ -97,6 +107,42 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
+                fragment<AddTaskFragment>(addTaskFragment) {
+                    label = getString(R.string.add_task)
+                    action(to_task_list_fragment){
+                        destinationId = taskListFragment
+                    }
+                    action(to_menu_works) {
+                        destinationId = works
+                    }
+                    action(to_menu_artist) {
+                        destinationId = artist
+                    }
+                    action(to_menu_newsFeed) {
+                        destinationId = newsFeed
+                    }
+                    argument(add_task_fragment) {
+                        type = StringType
+                    }
+                }
+                fragment<TaskListFragment>(taskListFragment){
+                    label = getString(R.string.list_of_tasks)
+                    action(to_add_task_fragment){
+                        destinationId = addTaskFragment
+                    }
+                    action(to_menu_works) {
+                        destinationId = works
+                    }
+                    action(to_menu_artist) {
+                        destinationId = artist
+                    }
+                    action(to_menu_newsFeed) {
+                        destinationId = newsFeed
+                    }
+                    argument(task_list_fragmen) {
+                        type = StringType
+                    }
+                }
             }
         }
 

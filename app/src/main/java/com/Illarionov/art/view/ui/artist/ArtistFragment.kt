@@ -20,8 +20,9 @@ import com.Illarionov.art.utils.SpanUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_artist.*
 import navigation.FragmentNavigation
-import navigation.NavigationGraph.Action.to_menu_newsFeed
-import navigation.NavigationGraph.Action.to_menu_works
+import navigation.NavigationConstants.Action.to_add_task_fragment
+import navigation.NavigationConstants.Action.to_menu_newsFeed
+import navigation.NavigationConstants.Action.to_menu_works
 
 private const val START_BOLD_SYMBOL = 0
 private const val END_BOLD_SYMBOL = 25
@@ -40,8 +41,10 @@ class ArtistFragment : Fragment(), FragmentNavigation {
             END_BOLD_SYMBOL,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-
         artist_info.text = spannableString
+        fab.setOnClickListener {
+            findNavController().navigate(to_add_task_fragment, null, null)
+        }
         navigateTo()
     }
 
@@ -76,12 +79,10 @@ class ArtistFragment : Fragment(), FragmentNavigation {
                 when (it) {
                     this.menu.findItem(menu_works) -> {
                         findNavController().navigate(to_menu_works, null, options)
-                        it.isChecked = true
                     }
 
                     this.menu.findItem(R.id.menu_newsFeed) -> {
                         findNavController().navigate(to_menu_newsFeed, null, options)
-                        it.isChecked = true
                     }
                 }
                 false

@@ -3,7 +3,7 @@ package com.Illarionov.art.network
 import android.util.Log
 import androidx.paging.PositionalDataSource
 import com.Illarionov.art.rest_api.ArtistApiService
-import com.Illarionov.art.storage.WorkDao
+import com.Illarionov.art.storage.DaoInterface
 import com.Illarionov.art.storage.WorkEntity
 import com.company.myartist.model.Work
 import com.company.myartist.model.response.WorksResponse
@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class WorksRemoteDataSource(private val dao: WorkDao) : PositionalDataSource<Work>() {
+class WorksRemoteDataSource(private val dao: DaoInterface) : PositionalDataSource<Work>() {
 
     private val api: ArtistApiService = ArtistApiService.create()
     private val compositeDisposable = CompositeDisposable()

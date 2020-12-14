@@ -43,6 +43,10 @@ android {
         jvmTarget = "1.8"
     }
 
+    androidExtensions{
+        experimental = true
+    }
+
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
 
@@ -103,7 +107,14 @@ dependencies {
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    //Singledateandtimepicker
+    implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
+
+    //SwipeRefreshLayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }
