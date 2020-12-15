@@ -15,6 +15,7 @@ import com.Illarionov.art.R.anim.*
 import com.Illarionov.art.R.id.menu_artist
 import com.Illarionov.art.R.id.menu_works
 import com.Illarionov.art.R.layout.fragment_news_feed
+import com.Illarionov.art.animations.AnimationHelper
 import com.Illarionov.art.extensions.observe
 import com.Illarionov.art.utils.NewsDiffUtilItemCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -77,14 +78,7 @@ class NewsFragment : Fragment(), FragmentNavigation {
     }*/
 
     override fun navigateTo() {
-        val options = navOptions {
-            anim {
-                enter = slide_in_right
-                exit = slide_out_left
-                popEnter = slide_in_left
-                popExit = slide_out_right
-            }
-        }
+        val options = AnimationHelper.getNavOptionsWithAnim()
 
         bottomNavigationView.apply {
             setOnNavigationItemSelectedListener {

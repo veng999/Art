@@ -11,6 +11,7 @@ import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import com.Illarionov.art.ArtistItemDecoration
 import com.Illarionov.art.R
+import com.Illarionov.art.animations.AnimationHelper
 import com.Illarionov.art.extensions.factory
 import com.Illarionov.art.extensions.observe
 import com.Illarionov.art.utils.WorksDiffUtilItemCallback
@@ -67,14 +68,7 @@ class WorksFragment : Fragment(), FragmentNavigation {
     }*/
 
     override fun navigateTo() {
-        val options = navOptions {
-            anim {
-                enter = R.anim.slide_in_right
-                exit = R.anim.slide_out_left
-                popEnter = R.anim.slide_in_left
-                popExit = R.anim.slide_out_right
-            }
-        }
+        val options = AnimationHelper.getNavOptionsWithAnim()
 
         bottomNavigationView.apply {
             setOnNavigationItemSelectedListener {

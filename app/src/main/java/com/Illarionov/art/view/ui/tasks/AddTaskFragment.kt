@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionManager
 import com.Illarionov.art.R
+import com.Illarionov.art.animations.AnimationHelper
 import com.Illarionov.art.extensions.factory
 import com.Illarionov.art.extensions.observe
 import com.Illarionov.art.receivers.EXT_ID
@@ -49,7 +50,8 @@ class AddTaskFragment : Fragment(){
 
         addButton.setOnClickListener {
             viewModel.onAddClick()
-            findNavController().navigate(NavigationConstants.Action.to_task_list_fragment, null, null)
+            val options = AnimationHelper.getNavOptionsWithAnim()
+            findNavController().navigate(NavigationConstants.Action.to_task_list_fragment, null, options)
         }
 
         setupDatePicker()

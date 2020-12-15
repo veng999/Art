@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="2dp"
-    android:background="@drawable/my_rect">
+    android:background="@drawable/my_rect"
+    android:id="@+id/layout">
 
     <ImageView
         android:id="@+id/imageWork"

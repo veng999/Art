@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -16,6 +17,7 @@ import com.Illarionov.art.R.anim.*
 import com.Illarionov.art.R.id.bottom_navigation_view
 import com.Illarionov.art.R.id.menu_works
 import com.Illarionov.art.R.layout.fragment_artist
+import com.Illarionov.art.animations.AnimationHelper
 import com.Illarionov.art.utils.SpanUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_artist.*
@@ -29,7 +31,7 @@ private const val END_BOLD_SYMBOL = 25
 
 class ArtistFragment : Fragment(), FragmentNavigation {
 
-    private lateinit var notificationsViewModel: ArtistViewModel
+    private val notificationsViewModel: ArtistViewModel by viewModels()
     private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,11 +54,7 @@ class ArtistFragment : Fragment(), FragmentNavigation {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        notificationsViewModel =
-            ViewModelProviders.of(this).get(ArtistViewModel::class.java)
-        return inflater.inflate(fragment_artist, container, false)
-    }
+    ) = inflater.inflate(fragment_artist, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,14 +62,7 @@ class ArtistFragment : Fragment(), FragmentNavigation {
     }
 
     override fun navigateTo() {
-        val options = navOptions {
-            anim {
-                enter = slide_in_right
-                exit = slide_out_left
-                popEnter = slide_in_left
-                popExit = slide_out_right
-            }
-        }
+        val options = AnimationHelper.getNavOptionsWithAnim()
 
         bottomNavigationView.apply {
             setOnNavigationItemSelectedListener {

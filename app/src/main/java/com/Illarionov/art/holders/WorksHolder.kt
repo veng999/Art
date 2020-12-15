@@ -1,12 +1,14 @@
 package com.Illarionov.art.holders
 
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.Illarionov.art.OnClickItemListener
 import com.Illarionov.art.R
+import com.Illarionov.art.animations.AnimationHelper
 import com.company.myartist.model.Media
 import com.company.myartist.model.Work
 import com.squareup.picasso.Picasso
@@ -14,7 +16,12 @@ import kotlinx.android.synthetic.main.view_work_item.view.*
 
 class WorksHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun show(item: Work?, listener: OnClickItemListener? = null) {
+    init {
+        itemView.likeBtn.setOnClickListener { AnimationHelper.rotateView(it) }
+        itemView.saleBtn.setOnClickListener { AnimationHelper.changeScaleOfView(it) }
+    }
+
+    fun show(item: Work?) {
         itemView.apply {
             val sizeWork =
                 itemView.context.resources.getDimension(R.dimen.works_fragment_work_width).toInt()
