@@ -12,8 +12,8 @@ import com.Illarionov.art.network.NewsRemoteDataSource
 import com.company.myartist.model.Event
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class NewsViewModel(
-    /*var dataSource: ArtistRemoteDataSource*/
+/*class NewsViewModel(
+    *//*var dataSource: ArtistRemoteDataSource*//*
 ) : BottomNavigationView.OnNavigationItemSelectedListener, ViewModel() {
 
     val dataSource = NewsRemoteDataSource()
@@ -55,7 +55,7 @@ class NewsViewModel(
         dataSource.clear()
         Log.d(TAG, "onCleadred")
     }
-}
+}*/
 
 
 

@@ -1,6 +1,8 @@
 package com.Illarionov.art.view.ui.artist
 
+import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.StyleSpan
@@ -8,30 +10,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import com.Illarionov.art.R
-import com.Illarionov.art.R.anim.*
 import com.Illarionov.art.R.id.bottom_navigation_view
-import com.Illarionov.art.R.id.menu_works
 import com.Illarionov.art.R.layout.fragment_artist
 import com.Illarionov.art.animations.AnimationHelper
 import com.Illarionov.art.utils.SpanUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_artist.*
 import navigation.FragmentNavigation
-import navigation.NavigationConstants.Action.to_add_task_fragment
-import navigation.NavigationConstants.Action.to_menu_newsFeed
-import navigation.NavigationConstants.Action.to_menu_works
 
 private const val START_BOLD_SYMBOL = 0
 private const val END_BOLD_SYMBOL = 25
 
 class ArtistFragment : Fragment(), FragmentNavigation {
 
-    private val notificationsViewModel: ArtistViewModel by viewModels()
     private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +38,8 @@ class ArtistFragment : Fragment(), FragmentNavigation {
         )
         artist_info.text = spannableString
         fab.setOnClickListener {
-            findNavController().navigate(to_add_task_fragment, null, null)
+            val navOptions = AnimationHelper.getNavOptionsWithAnim()
+            findNavController().navigate(R.id.menu_add_task, null, navOptions)
         }
         navigateTo()
     }
@@ -67,15 +61,7 @@ class ArtistFragment : Fragment(), FragmentNavigation {
         bottomNavigationView.apply {
             setOnNavigationItemSelectedListener {
                 it.isChecked = true
-                when (it) {
-                    this.menu.findItem(menu_works) -> {
-                        findNavController().navigate(to_menu_works, null, options)
-                    }
-
-                    this.menu.findItem(R.id.menu_newsFeed) -> {
-                        findNavController().navigate(to_menu_newsFeed, null, options)
-                    }
-                }
+                findNavController().navigate(R.id.menu_works, null, options)
                 false
             }
         }

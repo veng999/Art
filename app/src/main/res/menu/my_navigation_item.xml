@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/menu_newsFeed"
+    <!--<item android:id="@+id/menu_newsFeed"
         android:title="@string/menu_newsFeed"
-        android:icon="@drawable/ic_main_dark"/>
+        android:icon="@drawable/ic_main_dark"/>-->
 
     <item android:id="@+id/menu_artist"
         android:title="@string/menu_artist"
@@ -13,8 +13,8 @@
         android:title="@string/menu_works"
         android:icon="@drawable/ic_works_dark" />
 
-    <item android:id="@+id/menu_more"
+    <!--<item android:id="@+id/menu_more"
         android:title="@string/menu_more"
-        android:icon="@drawable/ic_more_dark" />
+        android:icon="@drawable/ic_more_dark" />-->
 
 </menu>

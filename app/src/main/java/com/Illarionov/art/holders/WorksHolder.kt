@@ -1,12 +1,10 @@
 package com.Illarionov.art.holders
 
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.Illarionov.art.OnClickItemListener
 import com.Illarionov.art.R
 import com.Illarionov.art.animations.AnimationHelper
 import com.company.myartist.model.Media
@@ -18,7 +16,7 @@ class WorksHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     init {
         itemView.likeBtn.setOnClickListener { AnimationHelper.rotateView(it) }
-        itemView.saleBtn.setOnClickListener { AnimationHelper.changeScaleOfView(it) }
+        itemView.saleBtn.setOnClickListener { AnimationHelper.shakeView(it) }
     }
 
     fun show(item: Work?) {

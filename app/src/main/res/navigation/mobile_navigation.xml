@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/menu_artist"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/menu_newsFeed"
+        android:name="com.Illarionov.art.view.ui.news.NewsFragment"
+        android:label="Лента"
+        tools:layout="@layout/fragment_news_feed" />
+
+    <fragment
+        android:id="@+id/menu_works"
+        android:name="com.Illarionov.art.view.ui.works.WorksFragment"
+        android:label="Работы"
+        tools:layout="@layout/fragment_works" >
+        <action
+            android:id="@+id/action_menu_works_to_menu_artist"
+            app:destination="@id/menu_artist" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_artist"
+        android:label="@string/menu_artist"
+        android:name="com.Illarionov.art.view.ui.artist.ArtistFragment"
+        tools:layout="@layout/fragment_works">
+        <action
+            android:id="@+id/action_menu_artist_to_menu_works"
+            app:destination="@id/menu_works" />
+        <action
+            android:id="@+id/action_menu_artist_to_menu_add_task"
+            app:destination="@id/menu_add_task" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_add_task"
+        android:label="@string/add_task"
+        android:name="com.Illarionov.art.view.ui.tasks.AddTaskFragment"
+        tools:layout="@layout/fragment_add_task">
+        <action
+            android:id="@+id/action_menu_add_task_to_menu_tasks_list"
+            app:destination="@id/menu_tasks_list" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menu_tasks_list"
+        android:label="@string/list_of_tasks"
+        android:name="com.Illarionov.art.view.ui.tasks.TaskListFragment"
+        tools:layout="@layout/fragment_task_list">
+        <action
+            android:id="@+id/action_menu_tasks_list_to_menu_works"
+            app:destination="@id/menu_works" />
+        <action
+            android:id="@+id/action_menu_tasks_list_to_menu_artist"
+            app:destination="@id/menu_artist" />
+    </fragment>
+
+</navigation>

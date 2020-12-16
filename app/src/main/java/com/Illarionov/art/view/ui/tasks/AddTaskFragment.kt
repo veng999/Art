@@ -24,7 +24,6 @@ import com.Illarionov.art.receivers.EXT_NAME
 import com.Illarionov.art.receivers.NotifyBroadcast
 import com.Illarionov.art.view.ui.tasks.AddTaskViewModel.Result
 import kotlinx.android.synthetic.main.fragment_add_task.*
-import navigation.NavigationConstants
 import java.util.*
 
 private const val DATE_FORMAT = "E dd MMM HH:mm"
@@ -51,7 +50,7 @@ class AddTaskFragment : Fragment(){
         addButton.setOnClickListener {
             viewModel.onAddClick()
             val options = AnimationHelper.getNavOptionsWithAnim()
-            findNavController().navigate(NavigationConstants.Action.to_task_list_fragment, null, options)
+            findNavController().navigate(R.id.menu_tasks_list, null, options)
         }
 
         setupDatePicker()
@@ -69,7 +68,6 @@ class AddTaskFragment : Fragment(){
             }
         }
     }
-
 
     private fun setObservers(){
         observe(viewModel.saveEnabled){

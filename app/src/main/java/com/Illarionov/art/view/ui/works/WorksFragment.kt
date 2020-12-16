@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import com.Illarionov.art.ArtistItemDecoration
 import com.Illarionov.art.R
@@ -18,7 +17,6 @@ import com.Illarionov.art.utils.WorksDiffUtilItemCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_works.*
 import navigation.FragmentNavigation
-import navigation.NavigationConstants
 
 private const val SPAN_COUNT = 2
 private const val ARTIST_ITEM_DECORATION_OFFSET = 8
@@ -26,7 +24,7 @@ private const val ARTIST_ITEM_DECORATION_OFFSET = 8
 class WorksFragment : Fragment(), FragmentNavigation {
 
     private lateinit var worksAdapter: WorksPagedListAdapter
-    private val viewModel: WorksViewModel by viewModels{ factory }
+    private val viewModel: WorksViewModel by viewModels { factory }
     private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,10 +35,11 @@ class WorksFragment : Fragment(), FragmentNavigation {
             setHasFixedSize(true)
             addItemDecoration(ArtistItemDecoration(ARTIST_ITEM_DECORATION_OFFSET))
         }
-        navigateTo()
-        observe(viewModel.worksList){
+
+        observe(viewModel.worksList) {
             worksAdapter.submitList(it)
         }
+        navigateTo()
     }
 
     override fun onCreateView(
@@ -72,17 +71,8 @@ class WorksFragment : Fragment(), FragmentNavigation {
 
         bottomNavigationView.apply {
             setOnNavigationItemSelectedListener {
-                when (it) {
-                    this.menu.findItem(R.id.menu_newsFeed) -> {
-                        findNavController().navigate(NavigationConstants.Action.to_menu_newsFeed, null, options)
-                        it.isChecked = true
-                    }
-
-                    this.menu.findItem(R.id.menu_artist) -> {
-                        findNavController().navigate(NavigationConstants.Action.to_menu_artist, null, options)
-                        it.isChecked = true
-                    }
-                }
+                it.isChecked = true
+                findNavController().navigate(R.id.menu_artist, null, options)
                 false
             }
         }
