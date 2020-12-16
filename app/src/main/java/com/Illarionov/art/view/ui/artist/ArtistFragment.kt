@@ -23,9 +23,7 @@ import navigation.FragmentNavigation
 private const val START_BOLD_SYMBOL = 0
 private const val END_BOLD_SYMBOL = 25
 
-class ArtistFragment : Fragment(), FragmentNavigation {
-
-    private lateinit var bottomNavigationView: BottomNavigationView
+class ArtistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +39,6 @@ class ArtistFragment : Fragment(), FragmentNavigation {
             val navOptions = AnimationHelper.getNavOptionsWithAnim()
             findNavController().navigate(R.id.menu_add_task, null, navOptions)
         }
-        navigateTo()
     }
 
     override fun onCreateView(
@@ -49,21 +46,4 @@ class ArtistFragment : Fragment(), FragmentNavigation {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = inflater.inflate(fragment_artist, container, false)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bottomNavigationView = requireActivity().findViewById(bottom_navigation_view)
-    }
-
-    override fun navigateTo() {
-        val options = AnimationHelper.getNavOptionsWithAnim()
-
-        bottomNavigationView.apply {
-            setOnNavigationItemSelectedListener {
-                it.isChecked = true
-                findNavController().navigate(R.id.menu_works, null, options)
-                false
-            }
-        }
-    }
 }

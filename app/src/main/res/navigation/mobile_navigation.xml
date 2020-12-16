@@ -27,7 +27,7 @@
         android:id="@+id/menu_artist"
         android:label="@string/menu_artist"
         android:name="com.Illarionov.art.view.ui.artist.ArtistFragment"
-        tools:layout="@layout/fragment_works">
+        tools:layout="@layout/fragment_artist">
         <action
             android:id="@+id/action_menu_artist_to_menu_works"
             app:destination="@id/menu_works" />

@@ -1,7 +1,5 @@
 package com.Illarionov.art.view
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -11,10 +9,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.Illarionov.art.R
+import com.Illarionov.art.animations.AnimationHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.fragment_artist.*
+import navigation.FragmentNavigation
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FragmentNavigation {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -38,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         setupBottomNavMenu(navController)
+        setBottomNavigationListener()
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         /*// Debugging tools in order to see which fragments swapped
@@ -60,5 +60,25 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavMenu(navController: NavController) {
         bottomNavView = findViewById(R.id.bottom_navigation_view)
         bottomNavView.setupWithNavController(navController)
+    }
+
+    override fun setBottomNavigationListener() {
+        val options = AnimationHelper.getNavOptionsWithAnim()
+
+        bottomNavView.apply {
+            setOnNavigationItemSelectedListener {
+                it.isChecked = true
+                when (it) {
+                    this.menu.findItem(R.id.menu_works) -> {
+                        navController.navigate(R.id.menu_works, null, options)
+                    }
+
+                    this.menu.findItem(R.id.menu_artist) -> {
+                        navController.navigate(R.id.menu_artist, null, options)
+                    }
+                }
+                false
+            }
+        }
     }
 }

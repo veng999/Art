@@ -1,5 +1,5 @@
 package navigation
 
 interface FragmentNavigation {
-    fun navigateTo()
+    fun setBottomNavigationListener()
 }

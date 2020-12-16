@@ -21,11 +21,10 @@ import navigation.FragmentNavigation
 private const val SPAN_COUNT = 2
 private const val ARTIST_ITEM_DECORATION_OFFSET = 8
 
-class WorksFragment : Fragment(), FragmentNavigation {
+class WorksFragment : Fragment() {
 
     private lateinit var worksAdapter: WorksPagedListAdapter
     private val viewModel: WorksViewModel by viewModels { factory }
-    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,7 +38,6 @@ class WorksFragment : Fragment(), FragmentNavigation {
         observe(viewModel.worksList) {
             worksAdapter.submitList(it)
         }
-        navigateTo()
     }
 
     override fun onCreateView(
@@ -52,29 +50,5 @@ class WorksFragment : Fragment(), FragmentNavigation {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         worksAdapter = WorksPagedListAdapter(WorksDiffUtilItemCallback())
-        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
-    }
-
-    /*private fun setProgress(loadState: NetworkState) {
-        when (loadState) {
-            is Success -> progress.visibility = View.GONE
-            is NetworkError -> {
-                progress.visibility = View.GONE
-                loadState.message?.let { displayError(it) }
-            }
-            is Loading -> progress.visibility = View.GONE
-        }
-    }*/
-
-    override fun navigateTo() {
-        val options = AnimationHelper.getNavOptionsWithAnim()
-
-        bottomNavigationView.apply {
-            setOnNavigationItemSelectedListener {
-                it.isChecked = true
-                findNavController().navigate(R.id.menu_artist, null, options)
-                false
-            }
-        }
     }
 }
