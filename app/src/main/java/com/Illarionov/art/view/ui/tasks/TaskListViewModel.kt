@@ -14,7 +14,7 @@ private const val DATE_FORMAT = "E dd MMM HH:mm"
 
 class TaskListViewModel(private val dao: DaoInterface) : ViewModel(){
 
-    val cancelTask: MutableLiveData<Int> = SingleLiveEvent()
+    private val cancelTask: MutableLiveData<Int> = SingleLiveEvent()
 
     fun getTasks() = dao.getTasks()
         .map {

@@ -40,10 +40,10 @@ class WorksRemoteDataSource(private val dao: DaoInterface) : PositionalDataSourc
     }
 
     private fun getData(response: WorksResponse?) =
-         (response?.data?.getArtWorks() ?: emptyList()).toMutableList()
+        (response?.data?.getArtWorks() ?: emptyList()).toMutableList()
 
     private fun getTotalCount(response: WorksResponse?) =
-         (response?.data?.count ?: "0").toInt()
+        (response?.data?.count ?: "0").toInt()
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<Work>) {
         api.getWorks(offset = params.startPosition)
