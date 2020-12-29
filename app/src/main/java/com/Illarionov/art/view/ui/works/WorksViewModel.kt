@@ -8,14 +8,16 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.Illarionov.art.factories.WorksDataSourceFactory
 import com.Illarionov.art.storage.DaoInterface
+import com.Illarionov.art.storage.WorksDataBase
 import com.Illarionov.art.utils.SingleLiveEvent
 import com.company.myartist.model.Work
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val ENABLE_PLACEHOLDERS = false
 private const val PAGE_SIZE = 10
 
-class WorksViewModel(private val dao: DaoInterface) : ViewModel() {
+class WorksViewModel @Inject constructor(private val dao: DaoInterface) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     private val _error: MutableLiveData<Unit> = SingleLiveEvent()

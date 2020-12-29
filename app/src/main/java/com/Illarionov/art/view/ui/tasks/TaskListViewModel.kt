@@ -5,14 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.Illarionov.art.storage.DaoInterface
+import com.Illarionov.art.storage.WorksDataBase
 import com.Illarionov.art.utils.SingleLiveEvent
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 private const val DATE_FORMAT = "E dd MMM HH:mm"
 
-class TaskListViewModel(private val dao: DaoInterface) : ViewModel(){
+class TaskListViewModel @Inject constructor(private val dao: DaoInterface) : ViewModel(){
 
     private val cancelTask: MutableLiveData<Int> = SingleLiveEvent()
 

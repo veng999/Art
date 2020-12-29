@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.Illarionov.art.storage.DaoInterface
 import com.Illarionov.art.storage.TaskEntity
+import com.Illarionov.art.storage.WorksDataBase
 import com.Illarionov.art.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class AddTaskViewModel(private val dao: DaoInterface) : ViewModel() {
+class AddTaskViewModel @Inject constructor(private val dao: DaoInterface) : ViewModel() {
 
     private var name: String = ""
     private var notifyEnabled = false
@@ -43,7 +45,13 @@ class AddTaskViewModel(private val dao: DaoInterface) : ViewModel() {
         viewModelScope.launch {
             name.let {
                 val isNotifyEnabled = if (notifyEnabled) notifyTime.time else null
-                val id = dao.saveTasks(TaskEntity(name = name, notifyEnabled = notifyEnabled, dateTime = isNotifyEnabled))
+                val id = dao.saveTasks(
+                    TaskEntity(
+                        name = name,
+                        notifyEnabled = notifyEnabled,
+                        dateTime = isNotifyEnabled
+                    )
+                )
                 _result.value = Result.Add(id.toInt(), name, isNotifyEnabled)
             }
         }

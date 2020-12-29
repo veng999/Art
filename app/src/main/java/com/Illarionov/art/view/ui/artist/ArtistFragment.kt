@@ -11,10 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.Illarionov.art.App
 import com.Illarionov.art.R
 import com.Illarionov.art.R.id.bottom_navigation_view
 import com.Illarionov.art.R.layout.fragment_artist
 import com.Illarionov.art.animations.AnimationHelper
+import com.Illarionov.art.di.MainComponent
 import com.Illarionov.art.utils.SpanUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_artist.*
@@ -46,4 +48,11 @@ class ArtistFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = inflater.inflate(fragment_artist, container, false)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MainComponent
+            .init(App.getApp().appComponent)
+            .injectArtistFragment(this)
+    }
 }

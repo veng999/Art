@@ -1,18 +1,23 @@
 package com.Illarionov.art
 
 import android.app.Application
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
-import com.Illarionov.art.factories.ViewModelFactory
-import com.Illarionov.art.storage.WorksDataBase
+import com.Illarionov.art.di.ApplicationComponent
+import com.Illarionov.art.di.DaggerApplicationComponent
 
-class App : Application(){
+class App : Application() {
 
-    lateinit var factory: ViewModelProvider.Factory
+    lateinit var appComponent: ApplicationComponent
+
+    companion object {
+        private lateinit var instance: App
+
+        @JvmStatic
+        fun getApp() = instance
+    }
 
     override fun onCreate() {
         super.onCreate()
-        val room = Room.databaseBuilder(this, WorksDataBase::class.java, "database").build()
-        factory = ViewModelFactory(room)
+        appComponent = DaggerApplicationComponent.builder().context(this).build()
+        instance = this
     }
 }

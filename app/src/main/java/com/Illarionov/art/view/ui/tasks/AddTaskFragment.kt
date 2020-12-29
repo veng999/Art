@@ -13,11 +13,13 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionManager
+import com.Illarionov.art.App
 import com.Illarionov.art.R
 import com.Illarionov.art.animations.AnimationHelper
-import com.Illarionov.art.extensions.factory
+import com.Illarionov.art.di.MainComponent
 import com.Illarionov.art.extensions.observe
 import com.Illarionov.art.receivers.EXT_ID
 import com.Illarionov.art.receivers.EXT_NAME
@@ -25,10 +27,14 @@ import com.Illarionov.art.receivers.NotifyBroadcast
 import com.Illarionov.art.view.ui.tasks.AddTaskViewModel.Result
 import kotlinx.android.synthetic.main.fragment_add_task.*
 import java.util.*
+import javax.inject.Inject
 
 private const val DATE_FORMAT = "E dd MMM HH:mm"
 
-class AddTaskFragment : Fragment(){
+class AddTaskFragment : Fragment() {
+
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
 
     private val viewModel: AddTaskViewModel by viewModels { factory }
 
@@ -40,6 +46,26 @@ class AddTaskFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initListeners()
+        setupDatePicker()
+        setObservers()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        inject()
+    }
+
+    private fun setupDatePicker() {
+        with(datePicker) {
+            setCustomLocale(Locale("ru"))
+            addOnDateChangedListener { _, date ->
+                viewModel.onDateChanged(date)
+            }
+        }
+    }
+
+    private fun initListeners() {
         etName.doOnTextChanged { text, _, _, _ ->
             viewModel.onNameChanged(text)
         }
@@ -53,56 +79,56 @@ class AddTaskFragment : Fragment(){
             findNavController().navigate(R.id.menu_tasks_list, null, options)
         }
 
-        setupDatePicker()
         cancelButton.setOnClickListener {
             viewModel.onCancelClick()
         }
-        setObservers()
     }
 
-    private fun setupDatePicker(){
-        with(datePicker){
-            setCustomLocale(Locale("ru"))
-            addOnDateChangedListener { _, date ->
-                viewModel.onDateChanged(date)
-            }
-        }
-    }
-
-    private fun setObservers(){
-        observe(viewModel.saveEnabled){
+    private fun setObservers() {
+        observe(viewModel.saveEnabled) {
             addButton.isEnabled = it
         }
-        observe(viewModel.timeChecked){
+        observe(viewModel.timeChecked) {
             TransitionManager.beginDelayedTransition(card)
             grTimeEdit.isVisible = it
         }
-        observe(viewModel.dateTime){
+        observe(viewModel.dateTime) {
             tvDateTime.text = android.text.format.DateFormat.format(DATE_FORMAT, it)
         }
 
-        observe(viewModel.result){ result ->
-            if(result is Result.Add){
+        observe(viewModel.result) { result ->
+            if (result is Result.Add) {
                 result.time?.let { time ->
-                    ContextCompat.getSystemService(requireContext(), AlarmManager::class.java)?.let { alarmManager ->
-                        val pendingIntent = PendingIntent.getBroadcast(
-                            requireContext(),
-                            result.id,
-                            Intent(requireContext(),
-                                NotifyBroadcast::class.java)
-                                .putExtra(EXT_NAME, result.name)
-                                .putExtra(EXT_ID, result.id),
-                            PendingIntent.FLAG_ONE_SHOT)
-                        //Allow to wake up device and send notification
-                        AlarmManagerCompat.setExactAndAllowWhileIdle(
-                            alarmManager,
-                            AlarmManager.RTC_WAKEUP,
-                            time,
-                            pendingIntent)
-                    }
+                    ContextCompat.getSystemService(requireContext(), AlarmManager::class.java)
+                        ?.let { alarmManager ->
+                            val pendingIntent = PendingIntent.getBroadcast(
+                                requireContext(),
+                                result.id,
+                                Intent(
+                                    requireContext(),
+                                    NotifyBroadcast::class.java
+                                )
+                                    .putExtra(EXT_NAME, result.name)
+                                    .putExtra(EXT_ID, result.id),
+                                PendingIntent.FLAG_ONE_SHOT
+                            )
+                            //Allow to wake up device and send notification
+                            AlarmManagerCompat.setExactAndAllowWhileIdle(
+                                alarmManager,
+                                AlarmManager.RTC_WAKEUP,
+                                time,
+                                pendingIntent
+                            )
+                        }
                 }
             }
             findNavController().popBackStack()
         }
+    }
+
+    private fun inject() {
+        MainComponent
+            .init(App.getApp().appComponent)
+            .injectAddTaskFragment(this)
     }
 }

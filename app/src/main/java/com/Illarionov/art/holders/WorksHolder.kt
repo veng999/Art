@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.Illarionov.art.App
 import com.Illarionov.art.R
 import com.Illarionov.art.animations.AnimationHelper
 import com.company.myartist.model.Media
@@ -15,8 +16,13 @@ import kotlinx.android.synthetic.main.view_work_item.view.*
 class WorksHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     init {
-        itemView.likeBtn.setOnClickListener { AnimationHelper.rotateView(it) }
-        itemView.saleBtn.setOnClickListener { AnimationHelper.shakeView(it) }
+        itemView.apply {
+            setOnClickListener {   }
+            likeBtn.setOnClickListener {
+                AnimationHelper.rotateView(it)
+            }
+            saleBtn.setOnClickListener { AnimationHelper.shakeView(it) }
+        }
     }
 
     fun show(item: Work?) {
