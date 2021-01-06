@@ -24,4 +24,9 @@
     <string name="cancel">Отменить</string>
     <string name="artist_name">Van Gogh</string>
     <string name="works_error">Во время загрузки работ произошла ошибка</string>
+    <string name="artist_s_canvas_desc">artist\'s canvas</string>
+    <string name="like_button_desc">like button</string>
+    <string name="sale_button_desc">sale button</string>
+    <string name="info_button_desc">info button</string>
+    <string name="add_notification_desc">Add notification</string>
 </resources>

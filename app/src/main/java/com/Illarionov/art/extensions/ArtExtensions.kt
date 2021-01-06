@@ -2,9 +2,8 @@ package com.Illarionov.art.extensions
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
-import com.Illarionov.art.App
-import com.Illarionov.art.view.ui.works.WorksViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 inline fun <T> Fragment.observe(data: LiveData<T>, crossinline callback: (T) -> Unit) =
     data.observe(viewLifecycleOwner, Observer { event -> event?.let { callback(it) } })

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,7 +18,8 @@
         android:adjustViewBounds="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/artist_s_canvas_desc" />
 
     <TextView
         android:id="@+id/titleWork"
@@ -43,7 +45,8 @@
         app:layout_constraintTop_toBottomOf="@id/titleWork"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/countWork"
-        tools:text="like" />
+        tools:text="like"
+        android:contentDescription="@string/like_button_desc" />
 
     <TextView
         android:id="@+id/countWork"
@@ -63,7 +66,8 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintTop_toBottomOf="@id/titleWork"
         app:layout_constraintRight_toLeftOf="@id/infoBtn"
-        app:layout_constraintBottom_toBottomOf="@id/countWork"/>
+        app:layout_constraintBottom_toBottomOf="@id/countWork"
+        android:contentDescription="@string/sale_button_desc" />
 
     <ImageView
         android:id="@+id/infoBtn"
@@ -74,6 +78,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintTop_toBottomOf="@id/titleWork"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/countWork"/>
+        app:layout_constraintBottom_toBottomOf="@id/countWork"
+        android:contentDescription="@string/info_button_desc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -88,9 +88,10 @@ class AddTaskFragment : Fragment() {
         observe(viewModel.saveEnabled) {
             addButton.isEnabled = it
         }
-        observe(viewModel.timeChecked) {
+        observe(viewModel.timeChecked) { isPicked ->
             TransitionManager.beginDelayedTransition(card)
-            grTimeEdit.isVisible = it
+            grTimeEdit.isVisible = isPicked
+            notificationAnim.isVisible = !isPicked
         }
         observe(viewModel.dateTime) {
             tvDateTime.text = android.text.format.DateFormat.format(DATE_FORMAT, it)

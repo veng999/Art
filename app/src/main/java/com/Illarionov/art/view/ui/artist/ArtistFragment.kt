@@ -1,8 +1,6 @@
 package com.Illarionov.art.view.ui.artist
 
-import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.StyleSpan
@@ -13,14 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.Illarionov.art.App
 import com.Illarionov.art.R
-import com.Illarionov.art.R.id.bottom_navigation_view
 import com.Illarionov.art.R.layout.fragment_artist
 import com.Illarionov.art.animations.AnimationHelper
 import com.Illarionov.art.di.MainComponent
 import com.Illarionov.art.utils.SpanUtils
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_artist.*
-import navigation.FragmentNavigation
 
 private const val START_BOLD_SYMBOL = 0
 private const val END_BOLD_SYMBOL = 25

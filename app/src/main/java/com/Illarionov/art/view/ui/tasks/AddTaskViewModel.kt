@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.Illarionov.art.storage.DaoInterface
 import com.Illarionov.art.storage.TaskEntity
-import com.Illarionov.art.storage.WorksDataBase
 import com.Illarionov.art.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 import java.util.*
