@@ -24,7 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/van_gogh_avatar"/>
+                android:src="@drawable/van_gogh_avatar"
+                android:contentDescription="@string/van_gogh_image_desc" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"
@@ -44,21 +45,18 @@
 
         <TextView
             android:id="@+id/artist_info"
+            style="@style/ArtistInfoStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_margin="@dimen/text_margin"
             android:text="@string/biography">
         </TextView>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
+        style="@style/FloatingActionButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:lineSpacingExtra="4sp"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:showMotionSpec="@anim/fade_in"

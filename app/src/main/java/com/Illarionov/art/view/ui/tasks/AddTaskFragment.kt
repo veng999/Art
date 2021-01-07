@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,7 +95,7 @@ class AddTaskFragment : Fragment() {
             notificationAnim.isVisible = !isPicked
         }
         observe(viewModel.dateTime) {
-            tvDateTime.text = android.text.format.DateFormat.format(DATE_FORMAT, it)
+            tvDateTime.text = DateFormat.format(DATE_FORMAT, it)
         }
 
         observe(viewModel.result) { result ->

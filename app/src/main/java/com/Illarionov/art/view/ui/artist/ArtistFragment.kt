@@ -34,7 +34,7 @@ class ArtistFragment : Fragment() {
         artist_info.text = spannableString
         fab.setOnClickListener {
             val navOptions = AnimationHelper.getNavOptionsWithAnim()
-            findNavController().navigate(R.id.menu_add_task, null, navOptions)
+            findNavController().navigate(R.id.action_menu_artist_to_menu_add_task, null, navOptions)
         }
     }
 

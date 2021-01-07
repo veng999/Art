@@ -50,20 +50,22 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
     }
 
     override fun setBottomNavigationListener() {
-        val options = AnimationHelper.getNavOptionsWithAnim()
-
         bottomNavView.apply {
             setOnNavigationItemSelectedListener { menuItem ->
                 menuItem.isChecked = true
-                when (menuItem) {
-                    menu.findItem(R.id.menu_works) ->
-                        navController.navigate(R.id.menu_works, null, options)
-
-                    menu.findItem(R.id.menu_artist) ->
-                        navController.navigate(R.id.action_menu_works_to_menu_artist, null, options)
+                when (menuItem.itemId) {
+                    R.id.menu_works -> navigate(R.id.menu_works)
+                    R.id.menu_artist -> navigate(R.id.menu_artist)
+                    R.id.menu_add_task -> navigate(R.id.menu_add_task)
+                    R.id.menu_tasks_list -> navigate(R.id.menu_tasks_list)
                 }
                 false
             }
         }
+    }
+
+    private fun navigate(action: Int) {
+        val options = AnimationHelper.getNavOptionsWithAnim()
+        navController.navigate(action, null, options)
     }
 }

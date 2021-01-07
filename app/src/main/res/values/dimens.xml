@@ -4,5 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="works_fragment_work_width">156dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
+    <dimen name="artist_margin_16dp">16dp</dimen>
+    <dimen name="artist_info_text_size_16sp">16sp</dimen>
+    <dimen name="fab_margin_2dp">2dp</dimen>
+    <dimen name="extra_spacing_4sp">4sp</dimen>
 </resources>

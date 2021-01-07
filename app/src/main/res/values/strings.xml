@@ -15,7 +15,7 @@
     <string name="news_title">Лента</string>
     <string name="works_title">Работы</string>
     <string name="artist_title">Художник</string>
-    <string name="tilName">Название выставки</string>
+    <string name="tilName">Введите название выставки</string>
     <string name="add_task">Добавить событие</string>
     <string name="list_of_tasks">Список событий</string>
     <string name="notification_name">Notification</string>
@@ -29,4 +29,5 @@
     <string name="sale_button_desc">sale button</string>
     <string name="info_button_desc">info button</string>
     <string name="add_notification_desc">Add notification</string>
+    <string name="van_gogh_image_desc">Van Gogh image</string>
 </resources>

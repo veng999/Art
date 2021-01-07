@@ -13,9 +13,21 @@
         <item name="titleTextColor">@color/white</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+    
+    <style name="ArtistInfoTextAppearance">
+        <item name="android:textSize">@dimen/artist_info_text_size_16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 
+    <style name="ArtistInfoStyle">
+        <item name="android:layout_margin">@dimen/artist_margin_16dp</item>
+        <item name="android:textAppearance">@style/ArtistInfoTextAppearance</item>
+    </style>
 
-
+    <style name="FloatingActionButtonStyle">
+        <item name="android:layout_margin">@dimen/fab_margin_2dp</item>
+        <item name="android:lineSpacingExtra">@dimen/extra_spacing_4sp</item>
+    </style>
 
 
 </resources>
