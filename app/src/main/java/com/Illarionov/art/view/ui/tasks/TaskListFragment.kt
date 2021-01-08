@@ -8,35 +8,42 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.Illarionov.art.App
-import com.Illarionov.art.R
+import com.Illarionov.art.databinding.FragmentTaskListBinding
 import com.Illarionov.art.di.MainComponent
 import com.Illarionov.art.extensions.observe
-import kotlinx.android.synthetic.main.fragment_task_list.*
 import javax.inject.Inject
 
 class TaskListFragment : Fragment() {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
-
+    private var fragmentTaskListBinding: FragmentTaskListBinding? = null
     private val viewModel: TaskListViewModel by viewModels { factory }
-    private val adapter = TaskListAdapter()
+    private var adapter = TaskListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_task_list, container, false)
+    ) : View? {
+        fragmentTaskListBinding = FragmentTaskListBinding.inflate(inflater, container, false)
+        return fragmentTaskListBinding?.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rvList.adapter = adapter
+        fragmentTaskListBinding?.rvList?.adapter = adapter
         initObservers()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        fragmentTaskListBinding = null
     }
 
     private fun initObservers(){

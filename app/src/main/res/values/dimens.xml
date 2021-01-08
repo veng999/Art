@@ -6,6 +6,9 @@
     <dimen name="works_fragment_work_width">156dp</dimen>
     <dimen name="artist_margin_16dp">16dp</dimen>
     <dimen name="artist_info_text_size_16sp">16sp</dimen>
-    <dimen name="fab_margin_2dp">2dp</dimen>
+    <dimen name="fab_margin_16dp">16dp</dimen>
     <dimen name="extra_spacing_4sp">4sp</dimen>
+    <dimen name="default_margin">0dp</dimen>
+    <dimen name="fragment_add_task_padding_vertical_16dp">16dp</dimen>
+    <dimen name="guideline_default_layout_constraint">16dp</dimen>
 </resources>

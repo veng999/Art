@@ -12,10 +12,12 @@ import com.company.myartist.model.Work
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_work_item.view.*
 
-class WorksHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+class WorksHolder(itemView: View) :
+    RecyclerView.ViewHolder(itemView) {
 
     init {
-        itemView.apply {
+
+        with(itemView){
             likeBtn.setOnClickListener { AnimationHelper.rotateView(it) }
             saleBtn.setOnClickListener { AnimationHelper.shakeView(it) }
         }
@@ -38,5 +40,6 @@ private fun into(
     url: String?,
     imageView: ImageView?,
     imagePlaceholder: String? = "#FFFFFF"
-) = Picasso.get().load(url).placeholder(ColorDrawable(Color.parseColor(imagePlaceholder))).into(imageView)
+) = Picasso.get().load(url).placeholder(ColorDrawable(Color.parseColor(imagePlaceholder)))
+    .into(imageView)
 

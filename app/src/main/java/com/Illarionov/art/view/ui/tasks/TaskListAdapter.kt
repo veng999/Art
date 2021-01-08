@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.Illarionov.art.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_task_list.*
-import javax.inject.Inject
 
 class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.ViewHolder>() {
     var items = listOf<TaskListItem>()

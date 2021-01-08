@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.Illarionov.art.R
 import com.Illarionov.art.animations.AnimationHelper
+import com.Illarionov.art.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import navigation.FragmentNavigation
 
@@ -20,12 +21,14 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
             .navController
     }
+    private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var bottomNavView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 /*R.id.menu_newsFeed,*/
@@ -45,14 +48,13 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
 
 
     private fun setupBottomNavMenu(navController: NavController) {
-        bottomNavView = findViewById(R.id.bottom_navigation_view)
+        bottomNavView = binding.bottomNavigationView
         bottomNavView.setupWithNavController(navController)
     }
 
     override fun setBottomNavigationListener() {
         bottomNavView.apply {
             setOnNavigationItemSelectedListener { menuItem ->
-                menuItem.isChecked = true
                 when (menuItem.itemId) {
                     R.id.menu_works -> navigate(R.id.menu_works)
                     R.id.menu_artist -> navigate(R.id.menu_artist)

@@ -7,22 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.Illarionov.art.R
-import com.Illarionov.art.R.layout.fragment_news_feed
+import com.Illarionov.art.databinding.FragmentNewsFeedBinding
 import com.Illarionov.art.utils.NewsDiffUtilItemCallback
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.fragment_news_feed.view.*
 
 
 class NewsFragment : Fragment() {
 
     private lateinit var newsAdapter: ArtistPagedListAdapter
+    private var binding: FragmentNewsFeedBinding? = null
     /*private lateinit var viewModel: NewsViewModel*/
-    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.news_feed_recycler_view.apply {
+        binding?.newsFeedRecyclerView?.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = newsAdapter
             setHasFixedSize(true)
@@ -38,7 +35,8 @@ class NewsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(fragment_news_feed, container, false)
+        binding = FragmentNewsFeedBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
 
@@ -50,9 +48,13 @@ class NewsFragment : Fragment() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         }*/)
-        bottomNavigationView = requireActivity().findViewById(R.id.bottom_navigation_view)
         /*viewModel = ViewModelProvider(this)[NewsViewModel::class.java]*/
         /*viewModel = NewsViewModel(ArtistRemoteDataSource())*/
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     /*private fun setProgress(loadState: NetworkState) {

@@ -20,13 +20,13 @@ import androidx.transition.TransitionManager
 import com.Illarionov.art.App
 import com.Illarionov.art.R
 import com.Illarionov.art.animations.AnimationHelper
+import com.Illarionov.art.databinding.FragmentAddTaskBinding
 import com.Illarionov.art.di.MainComponent
 import com.Illarionov.art.extensions.observe
 import com.Illarionov.art.receivers.EXT_ID
 import com.Illarionov.art.receivers.EXT_NAME
 import com.Illarionov.art.receivers.NotifyBroadcast
 import com.Illarionov.art.view.ui.tasks.AddTaskViewModel.Result
-import kotlinx.android.synthetic.main.fragment_add_task.*
 import java.util.*
 import javax.inject.Inject
 
@@ -36,6 +36,7 @@ class AddTaskFragment : Fragment() {
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+    private var binding: FragmentAddTaskBinding? = null
 
     private val viewModel: AddTaskViewModel by viewModels { factory }
 
@@ -43,7 +44,10 @@ class AddTaskFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_add_task, container, false)
+    ): View? {
+        binding = FragmentAddTaskBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,45 +61,58 @@ class AddTaskFragment : Fragment() {
         inject()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     private fun setupDatePicker() {
-        with(datePicker) {
-            setCustomLocale(Locale("ru"))
-            addOnDateChangedListener { _, date ->
-                viewModel.onDateChanged(date)
+        binding?.let { binding ->
+            with(binding.datePicker){
+                setCustomLocale(Locale("ru"))
+                addOnDateChangedListener { _, date ->
+                    viewModel.onDateChanged(date)
+                }
             }
         }
     }
 
     private fun initListeners() {
-        etName.doOnTextChanged { text, _, _, _ ->
-            viewModel.onNameChanged(text)
-        }
-        switchTime.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.onTimeCheckedChange(isChecked)
-        }
-
-        addButton.setOnClickListener {
-            viewModel.onAddClick()
-            val options = AnimationHelper.getNavOptionsWithAnim()
-            findNavController().navigate(R.id.menu_tasks_list, null, options)
-        }
-
-        cancelButton.setOnClickListener {
-            viewModel.onCancelClick()
+        binding?.let { binding ->
+            with(binding) {
+                etName.doOnTextChanged { text, _, _, _ ->
+                    viewModel.onNameChanged(text)
+                }
+                switchTime.setOnCheckedChangeListener { _, isChecked ->
+                    viewModel.onTimeCheckedChange(isChecked)
+                }
+                addButton.setOnClickListener {
+                    viewModel.onAddClick()
+                    val options = AnimationHelper.getNavOptionsWithAnim()
+                    findNavController().navigate(R.id.menu_tasks_list, null, options)
+                }
+                cancelButton.setOnClickListener {
+                    viewModel.onCancelClick()
+                }
+            }
         }
     }
 
     private fun setObservers() {
-        observe(viewModel.saveEnabled) {
-            addButton.isEnabled = it
-        }
-        observe(viewModel.timeChecked) { isPicked ->
-            TransitionManager.beginDelayedTransition(card)
-            grTimeEdit.isVisible = isPicked
-            notificationAnim.isVisible = !isPicked
-        }
-        observe(viewModel.dateTime) {
-            tvDateTime.text = DateFormat.format(DATE_FORMAT, it)
+        binding?.let { binding ->
+            with(binding){
+                observe(viewModel.saveEnabled) {
+                    addButton.isEnabled = it
+                }
+                observe(viewModel.timeChecked) { isPicked ->
+                    TransitionManager.beginDelayedTransition(card)
+                    grTimeEdit.isVisible = isPicked
+                    notificationAnim.isVisible = !isPicked
+                }
+                observe(viewModel.dateTime) {
+                    tvDateTime.text = DateFormat.format(DATE_FORMAT, it)
+                }
+            }
         }
 
         observe(viewModel.result) { result ->

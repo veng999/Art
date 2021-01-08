@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/van_gogh_avatar"
+                app:srcCompat="@drawable/van_gogh_avatar"
                 android:contentDescription="@string/van_gogh_image_desc" />
 
             <androidx.appcompat.widget.Toolbar
@@ -60,7 +60,7 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:showMotionSpec="@anim/fade_in"
-        android:src="@drawable/ic_add_black_24dp"
+        app:srcCompat="@drawable/ic_add_black_24dp"
         android:contentDescription="@string/add_notification_desc" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

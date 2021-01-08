@@ -19,5 +19,5 @@ class WorksPagedListAdapter(
         )
 
     override fun onBindViewHolder(holder: WorksHolder, position: Int) =
-        holder.run { show(item = getItem(position)) }
+        holder.run { show(item = getItem(holder.adapterPosition)) }
 }
