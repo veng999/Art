@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_main_dark"/>-->
 
     <item android:id="@+id/menu_artist"
-        android:title="@string/menu_artist"
+        android:title="@string/fragment_artist_label"
         android:icon="@drawable/ic_artist_dark"/>
 
     <item android:id="@+id/menu_works"

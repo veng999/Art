@@ -5,7 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.Illarionov.art.R
-import com.Illarionov.art.animations.AnimationHelper
+import com.Illarionov.art.utils.AnimationHelper
 import com.Illarionov.art.databinding.ViewWorkItemBinding
 import com.company.myartist.model.Media
 import com.company.myartist.model.Work

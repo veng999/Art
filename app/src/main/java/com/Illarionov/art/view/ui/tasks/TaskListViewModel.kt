@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.Illarionov.art.storage.DaoInterface
-import com.Illarionov.art.storage.WorksDataBase
 import com.Illarionov.art.utils.SingleLiveEvent
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch

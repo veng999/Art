@@ -19,7 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionManager
 import com.Illarionov.art.App
 import com.Illarionov.art.R
-import com.Illarionov.art.animations.AnimationHelper
+import com.Illarionov.art.utils.AnimationHelper
 import com.Illarionov.art.databinding.FragmentAddTaskBinding
 import com.Illarionov.art.di.MainComponent
 import com.Illarionov.art.extensions.observe
@@ -129,7 +129,7 @@ class AddTaskFragment : Fragment() {
                                 )
                                     .putExtra(EXT_NAME, result.name)
                                     .putExtra(EXT_ID, result.id),
-                                PendingIntent.FLAG_ONE_SHOT
+                                PendingIntent.FLAG_UPDATE_CURRENT
                             )
                             //Allow to wake up device and send notification
                             AlarmManagerCompat.setExactAndAllowWhileIdle(

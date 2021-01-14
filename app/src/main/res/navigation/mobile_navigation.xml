@@ -10,13 +10,18 @@
     <fragment
         android:id="@+id/menu_newsFeed"
         android:name="com.Illarionov.art.view.ui.news.NewsFragment"
-        android:label="Лента"
+        android:label="@string/fragment_news_feed_label"
         tools:layout="@layout/fragment_news_feed" />
+
+    <fragment
+        android:id="@+id/menu_feedback"
+        android:name="com.Illarionov.art.view.ui.feedback.FeedbackFragment"
+        android:label="@string/fragment_feedback_label"/>
 
     <fragment
         android:id="@+id/menu_works"
         android:name="com.Illarionov.art.view.ui.works.WorksFragment"
-        android:label="Работы"
+        android:label="@string/fragment_works_label"
         tools:layout="@layout/fragment_works" >
         <action
             android:id="@+id/action_menu_works_to_menu_artist"
@@ -25,7 +30,7 @@
 
     <fragment
         android:id="@+id/menu_artist"
-        android:label="@string/menu_artist"
+        android:label="@string/fragment_artist_label"
         android:name="com.Illarionov.art.view.ui.artist.ArtistFragment"
         tools:layout="@layout/fragment_artist">
         <action
@@ -38,7 +43,7 @@
 
     <fragment
         android:id="@+id/menu_add_task"
-        android:label="@string/add_task"
+        android:label="@string/fragment_add_task_label"
         android:name="com.Illarionov.art.view.ui.tasks.AddTaskFragment"
         tools:layout="@layout/fragment_add_task">
         <action
@@ -51,7 +56,7 @@
 
     <fragment
         android:id="@+id/menu_tasks_list"
-        android:label="@string/list_of_tasks"
+        android:label="@string/fragment_list_of_tasks_label"
         android:name="com.Illarionov.art.view.ui.tasks.TaskListFragment"
         tools:layout="@layout/fragment_task_list">
         <action

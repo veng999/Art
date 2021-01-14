@@ -10,7 +10,8 @@ import com.company.myartist.model.response.WorksResponse
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class WorksRemoteDataSource(private val dao: DaoInterface) : PositionalDataSource<Work>() {
@@ -18,6 +19,7 @@ class WorksRemoteDataSource(private val dao: DaoInterface) : PositionalDataSourc
     private val api: ArtistApiService = ArtistApiService.create()
     private val compositeDisposable = CompositeDisposable()
     private val TAG = WorksRemoteDataSource::class.java.simpleName
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     override fun loadInitial(
         params: LoadInitialParams, callback: LoadInitialCallback<Work>
@@ -28,7 +30,7 @@ class WorksRemoteDataSource(private val dao: DaoInterface) : PositionalDataSourc
             .subscribe(
                 {
                     val works = getData(it)
-                    MainScope().launch {
+                    scope.launch {
                         dao.saveWorks(WorkEntity(it.data?.works))
                     }
                     callback.onResult(works, 0)
@@ -52,7 +54,7 @@ class WorksRemoteDataSource(private val dao: DaoInterface) : PositionalDataSourc
             .subscribe(
                 {
                     val data = getData(it)
-                    MainScope().launch {
+                    scope.launch(Dispatchers.IO) {
                         dao.saveWorks(WorkEntity(it.data?.works))
                     }
                     callback.onResult(data)

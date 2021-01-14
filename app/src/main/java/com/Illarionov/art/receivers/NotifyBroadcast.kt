@@ -15,6 +15,7 @@ import com.Illarionov.art.view.MainActivity
 private const val CHANNEL_ID = "todo_notify"
 const val EXT_ID = "ext_id"
 const val EXT_NAME = "ext_name"
+const val NOTIFICATION_CHANNEL_DESC = "Exhibition channel "
 
 class NotifyBroadcast: BroadcastReceiver() {
 
@@ -28,6 +29,7 @@ class NotifyBroadcast: BroadcastReceiver() {
                     context.getString(R.string.notification_name),
                     NotificationManager.IMPORTANCE_HIGH
                 )
+                channel.description = NOTIFICATION_CHANNEL_DESC
                 notificationManager.createNotificationChannel(channel)
             }
         }

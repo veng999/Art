@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Art</string>
     <string name="menu_newsFeed">Лента</string>
-    <string name="menu_artist">Художник</string>
+    <string name="fragment_artist_label">Художник</string>
     <string name="menu_works">Работы</string>
     <string name="menu_more">Еще</string>
     <string name="title_activity_main2">Main2Activity</string>
@@ -16,8 +16,8 @@
     <string name="works_title">Работы</string>
     <string name="artist_title">Художник</string>
     <string name="tilName">Введите название выставки</string>
-    <string name="add_task">Добавить событие</string>
-    <string name="list_of_tasks">Список событий</string>
+    <string name="fragment_add_task_label">Добавить событие</string>
+    <string name="fragment_list_of_tasks_label">Список событий</string>
     <string name="notification_name">Notification</string>
     <string name="time">Время</string>
     <string name="add">Добавить</string>
@@ -30,4 +30,13 @@
     <string name="info_button_desc">info button</string>
     <string name="add_notification_desc">Add notification</string>
     <string name="van_gogh_image_desc">Van Gogh image</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="feedback_title">Здесь вы можете поделиться своими впечатлениями о работе приложения</string>
+    <string name="feedback_success">Ваш отзыв успешно отправлен</string>
+    <string name="feedback_hint">Feedback</string>
+    <string name="send_feedback">Отправить</string>
+    <string name="fragment_news_feed_label">Лента</string>
+    <string name="fragment_feedback_label">Обратная связь</string>
+    <string name="fragment_works_label">Работы</string>
+    <string name="feedback_failure">При добавлении отзыва возникла ошибка</string>
 </resources>
