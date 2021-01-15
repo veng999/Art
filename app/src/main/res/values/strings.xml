@@ -33,7 +33,7 @@
     <string name="feedback">Обратная связь</string>
     <string name="feedback_title">Здесь вы можете поделиться своими впечатлениями о работе приложения</string>
     <string name="feedback_success">Ваш отзыв успешно отправлен</string>
-    <string name="feedback_hint">Feedback</string>
+    <string name="feedback_hint">Место для вашего отзыва</string>
     <string name="send_feedback">Отправить</string>
     <string name="fragment_news_feed_label">Лента</string>
     <string name="fragment_feedback_label">Обратная связь</string>

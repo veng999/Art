@@ -51,6 +51,8 @@ class FeedbackFragment : Fragment() {
                     )
                     .addOnSuccessListener { showSuccessMessage() }
                     .addOnFailureListener { showErrorMessage(it) }
+
+                clearEditText()
             }
         }
     }
@@ -63,6 +65,8 @@ class FeedbackFragment : Fragment() {
         )
             .show()
     }
+
+    private fun clearEditText() = binding?.feedBackEditText?.setText("")
 
     private fun showSuccessMessage() {
         Toast.makeText(activity, resources.getString(R.string.feedback_success), Toast.LENGTH_LONG)
