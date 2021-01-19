@@ -2,6 +2,7 @@ package com.Illarionov.art.view
 
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -22,7 +23,7 @@ private const val TEST_STRING = "The best exhibition"
 
 @LargeTest
 @RunWith(AndroidJUnit4ClassRunner::class)
-class ArtNavigationTest1 {
+class ArtNavigationTest {
 
     @Rule
     @JvmField
@@ -39,11 +40,12 @@ class ArtNavigationTest1 {
     fun testAddTask() {
         val navOptions = AnimationHelper.getNavOptionsWithAnim()
         //Check biography textView's text
-        //onView1(R.id.artist_info).check(matches(withText(R.string.biography)))
+        onView(withId(R.id.artist_info))
+            .check(matches(withText(R.string.biography)))
 
         //Check that fab is displayed and clickable and then click
-        //onView1(R.id.fab).check(matches(allOf(isDisplayed(), isClickable())))
-            //.perform(click())
+        onView(withId(R.id.fab)).check(matches(allOf(isDisplayed(), isClickable())))
+            .perform(click())
 
         //Check that our navigation's destination id is equals R.id.menu_add_task
         assertThat(testNavHostController.currentDestination?.id).isEqualTo(R.id.menu_artist)
@@ -54,28 +56,28 @@ class ArtNavigationTest1 {
         sleep(DEFAULT_SLEEP)
 
         //Check that TextInputEditText displayed and focusable + include resource string
-        //onView1(R.id.etName)
-            /*.check(matches(allOf(isDisplayed(), isFocusable())))
-            .perform(typeText(TEST_STRING))*/
+        onView(withId(R.id.etName))
+            .check(matches(allOf(isDisplayed(), isFocusable())))
+            .perform(typeText(TEST_STRING))
 
         sleep(DEFAULT_SLEEP)
 
-        /*onView1(R.id.switchTime)
+        onView(withId(R.id.switchTime))
             .check(matches(allOf(isDisplayed(), isFocusable(), isClickable())))
             .perform(closeSoftKeyboard())
-            .perform(click())*/
+            .perform(click())
 
         sleep(DEFAULT_SLEEP)
 
-        /*onView1(R.id.datePicker)
+        onView(withId(R.id.datePicker))
             .check(matches(isDisplayed()))
             .perform(SingleDateAndTimePickerAction1())
 
         sleep(DEFAULT_SLEEP)
 
-        onView1(R.id.addButton)
+        onView(withId(R.id.addButton))
             .check(matches(allOf(isDisplayed(), isClickable())))
-            .perform(click())*/
+            .perform(click())
 
         sleep(DEFAULT_SLEEP)
 
