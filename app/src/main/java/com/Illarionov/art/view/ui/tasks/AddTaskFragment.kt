@@ -45,6 +45,7 @@ class AddTaskFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        this.requireActivity().setTheme(R.style.AppTheme)
         binding = FragmentAddTaskBinding.inflate(inflater, container, false)
         return binding?.root
     }

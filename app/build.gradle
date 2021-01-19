@@ -9,6 +9,12 @@ android {
     buildFeatures {
         viewBinding true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+        unitTests{
+            includeAndroidResources = true
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
@@ -99,9 +105,18 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:3.0.2') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'appcompat-v7'
+    }
 
     def room_version = "2.2.5"
 
@@ -115,7 +130,7 @@ dependencies {
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 
-    //Singledateandtimepicker
+    //SingleDateAndTimePicker
     implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
 
     //SwipeRefreshLayout
@@ -128,7 +143,29 @@ dependencies {
     //Lottie
     implementation "com.airbnb.android:lottie:3.6.0"
 
+    //Navigation-testing
+    androidTestImplementation "androidx.navigation:navigation-testing:2.3.2"
+
+    //Testing Fragment
+    debugImplementation('androidx.fragment:fragment-testing:1.2.5') {
+        exclude group: 'androidx.test', module: 'monitor'
+    }
+
+    androidTestImplementation "com.google.truth:truth:1.1"
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    testImplementation "com.google.truth:truth:1.1"
+    testImplementation 'androidx.test:runner:1.1.0'
+    testImplementation 'androidx.test:rules:1.1.0'
+    testImplementation "androidx.navigation:navigation-testing:2.3.2"
+    testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    testImplementation "org.robolectric:robolectric:4.4"
+
 }

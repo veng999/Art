@@ -49,6 +49,7 @@ class ArtistFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        this.requireActivity().setTheme(R.style.AppTheme)
         binding = FragmentArtistBinding.inflate(inflater, container, false)
         return binding?.root
     }
