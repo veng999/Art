@@ -77,7 +77,7 @@ interface ArtistApiService {
                  @Query("min_x") min_x: String = "",
                  @Query("max_x") max_x: String = "",
                  @Query("extends") extends: String = "works.media_id,works.counters,works.properties,works.collection_id,works.infos,works.description,filters.uri,works.aset_ids,works.artist_ids,works.media_id")
-            : Observable<WorksResponse>
+            : Single<WorksResponse>
 
     @GET("works.search")
     fun getFilters(@Query("with_filters") with_filters: String = "y",

@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/menu_artist"
-        android:label="@string/fragment_artist_label"
+        android:label="@string/artist_name"
         android:name="com.Illarionov.art.view.ui.artist.ArtistFragment"
         tools:layout="@layout/fragment_artist">
         <action

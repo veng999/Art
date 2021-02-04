@@ -129,7 +129,7 @@ class AddTaskFragment : Fragment() {
                                 )
                                     .putExtra(EXT_NAME, result.name)
                                     .putExtra(EXT_ID, result.id),
-                                PendingIntent.FLAG_UPDATE_CURRENT
+                                PendingIntent.FLAG_ONE_SHOT
                             )
                             //Allow to wake up device and send notification
                             AlarmManagerCompat.setExactAndAllowWhileIdle(

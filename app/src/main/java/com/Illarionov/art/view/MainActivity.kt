@@ -1,5 +1,6 @@
 package com.Illarionov.art.view
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -45,12 +46,22 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
         setupNavViewListeners()
         setupBottomNavMenu(navController)
         setBottomNavigationListener()
+        setStatusBarColor()
+        setActionBarColor()
         setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    private fun setActionBarColor() {
+        val colorDrawable = ColorDrawable(resources.getColor(R.color.holo_blue_dark))
+        supportActionBar?.setBackgroundDrawable(colorDrawable)
+    }
+
+    private fun setStatusBarColor() {
+        window.statusBarColor = resources.getColor(R.color.holo_blue_dark)
     }
 
     override fun onSupportNavigateUp() =
         navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-
 
     override fun setBottomNavigationListener() {
         bottomNavView.apply {

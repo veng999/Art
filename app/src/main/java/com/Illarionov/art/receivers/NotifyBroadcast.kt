@@ -37,7 +37,7 @@ class NotifyBroadcast: BroadcastReceiver() {
             context,
             0,
             Intent(context, MainActivity::class.java),
-            PendingIntent.FLAG_CANCEL_CURRENT
+            PendingIntent.FLAG_ONE_SHOT
         )
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)

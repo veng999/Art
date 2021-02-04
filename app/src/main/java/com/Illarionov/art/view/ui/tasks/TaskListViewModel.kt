@@ -1,9 +1,6 @@
 package com.Illarionov.art.view.ui.tasks
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.Illarionov.art.storage.DaoInterface
 import com.Illarionov.art.utils.SingleLiveEvent
 import kotlinx.coroutines.flow.map
@@ -15,7 +12,8 @@ private const val DATE_FORMAT = "E dd MMM HH:mm"
 
 class TaskListViewModel @Inject constructor(private val dao: DaoInterface) : ViewModel(){
 
-    private val cancelTask: MutableLiveData<Int> = SingleLiveEvent()
+    private val _cancelTask: MutableLiveData<Int> = SingleLiveEvent()
+    val cancelTask: LiveData<Int> = _cancelTask
 
     fun getTasks() = dao.getTasks()
         .map {
@@ -33,7 +31,7 @@ class TaskListViewModel @Inject constructor(private val dao: DaoInterface) : Vie
         }.asLiveData(viewModelScope.coroutineContext)
 
     fun onCheckedTask(id: Long, checked: Boolean){
-        if (checked) cancelTask.value = id.toInt()
+        if (checked) _cancelTask.value = id.toInt()
         viewModelScope.launch {
             dao.setChecked(id, checked)
         }
