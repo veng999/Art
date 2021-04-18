@@ -26,6 +26,4 @@ interface DaoInterface {
     @Query("UPDATE tasks SET is_checked=:checked WHERE id=:id")
     suspend fun setChecked(id: Long, checked: Boolean)
 
-    //@Query("SELECT * FROM works ORDER BY id")
-    //suspend fun getWorks(): Flow<List<WorksResponse>>
 }

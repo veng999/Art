@@ -6,4 +6,5 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="holo_blue_dark">#ff0099cc</color>
+    <color name="shape_bg_comment_input_color">#339E9E9E</color>
 </resources>

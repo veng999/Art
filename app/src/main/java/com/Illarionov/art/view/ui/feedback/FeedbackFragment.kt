@@ -38,20 +38,17 @@ class FeedbackFragment : Fragment() {
     }
 
     private fun setupFirestore() {
-        val firestore = Firebase.firestore
+        val fireStore = Firebase.firestore
         binding?.let { binding ->
             binding.sendButton.setOnClickListener {
                 val comment = binding.feedBackEditText.text.toString()
                 if (comment.isBlank()) {
                     return@setOnClickListener
                 }
-                firestore.collection(NAME_OF_COLLECTION)
-                    .add(
-                        hashMapOf(COMMENT to comment)
-                    )
+                fireStore.collection(NAME_OF_COLLECTION)
+                    .add(hashMapOf(COMMENT to comment))
                     .addOnSuccessListener { showSuccessMessage() }
                     .addOnFailureListener { showErrorMessage(it) }
-
                 clearEditText()
             }
         }
@@ -61,9 +58,7 @@ class FeedbackFragment : Fragment() {
         Toast.makeText(
             activity,
             """${resources.getString(R.string.feedback_failure)}$it""",
-            Toast.LENGTH_LONG
-        )
-            .show()
+            Toast.LENGTH_LONG).show()
     }
 
     private fun clearEditText() = binding?.feedBackEditText?.setText("")

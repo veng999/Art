@@ -17,28 +17,6 @@ import navigation.FragmentNavigation
 
 class MainActivity : AppCompatActivity(), FragmentNavigation {
 
-    private val navController by lazy {
-        (supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
-            .navController
-    }
-    private val binding: ActivityMainBinding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
-    }
-    private val appBarConfiguration by lazy {
-        AppBarConfiguration(
-            setOf(
-                /*R.id.menu_newsFeed,*/
-                R.id.menu_artist,
-                R.id.menu_works
-                /*R.id.menu_more*/
-            ), binding.drawerLayout
-        )
-    }
-    private val bottomNavView by lazy {
-        binding.bottomNavigationView
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -49,15 +27,6 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
         setStatusBarColor()
         setActionBarColor()
         setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    private fun setActionBarColor() {
-        val colorDrawable = ColorDrawable(resources.getColor(R.color.holo_blue_dark))
-        supportActionBar?.setBackgroundDrawable(colorDrawable)
-    }
-
-    private fun setStatusBarColor() {
-        window.statusBarColor = resources.getColor(R.color.holo_blue_dark)
     }
 
     override fun onSupportNavigateUp() =
@@ -75,6 +44,40 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
                 false
             }
         }
+    }
+
+    private val navController by lazy {
+        (supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
+            .navController
+    }
+
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    private val appBarConfiguration by lazy {
+        AppBarConfiguration(
+            setOf(
+                /*R.id.menu_newsFeed,*/
+                R.id.menu_artist,
+                R.id.menu_works
+                /*R.id.menu_more*/
+            ), binding.drawerLayout
+        )
+    }
+
+    private val bottomNavView by lazy {
+        binding.bottomNavigationView
+    }
+
+    private fun setActionBarColor() {
+        val colorDrawable = ColorDrawable(resources.getColor(R.color.holo_blue_dark))
+        supportActionBar?.setBackgroundDrawable(colorDrawable)
+    }
+
+    private fun setStatusBarColor() {
+        window.statusBarColor = resources.getColor(R.color.holo_blue_dark)
     }
 
     private fun setupNavView() = binding.navView.setupWithNavController(navController)
