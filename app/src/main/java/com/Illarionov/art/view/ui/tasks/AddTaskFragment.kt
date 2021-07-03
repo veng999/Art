@@ -106,9 +106,12 @@ class AddTaskFragment : Fragment() {
                 addButton.setOnClickListener {
                     viewModel.onAddClick()
                     val options = AnimationHelper.getNavOptionsWithAnim()
+                    artImmHelper.hideSoftInput()
                     findNavController().navigate(R.id.menu_tasks_list, null, options)
                 }
-                cancelButton.setOnClickListener { viewModel.onCancelClick() }
+                cancelButton.setOnClickListener { viewModel.onCancelClick()
+                artImmHelper.hideSoftInput()
+                }
             }
         }
     }
