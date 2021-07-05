@@ -40,6 +40,10 @@ data class Media(
         return "${base_url}/img/${ratio}${side}${size}/${use_type}/${version}/${media_id}.${data?.ext}"
     }
 
+    fun getUrl() {
+
+    }
+
     private fun getCorrectSizeImage(sizeImage: Int): Int {
         for (i in 0..sizes.size - 1) {
             if (i < sizes.size - 1 && sizeImage >= sizes[i] && sizeImage <= sizes[i + 1]) {

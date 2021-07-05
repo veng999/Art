@@ -39,7 +39,7 @@ data class Event(
     private fun getFormatMonth(date: LocalDateTime) =
         if (date.monthValue < 10) "0${date.monthValue}" else date.monthValue
 
-    fun getBeforeLastIdEvent() = (ids ?: emptyList()).map { it.toLong() }.min() ?: 0L
+    fun getBeforeLastIdEvent() = (ids ?: emptyList()).map { it.toLong() }.minOrNull() ?: 0L
 
     data class Attach(
         val uri: String?,

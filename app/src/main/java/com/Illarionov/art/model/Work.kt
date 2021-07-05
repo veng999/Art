@@ -1,5 +1,9 @@
 package com.company.myartist.model
 
+private const val DEFAULT_TITLE = "The most interesting title"
+private const val DEFAULT_COUNT = "0"
+private const val DEFAULT_COLOR = "#ffffff"
+
 data class Work(
     val work_id: String?,
     val user_id: String?,
@@ -113,4 +117,17 @@ data class Work(
         val aset_id: String?,
         val aset_name: String?
     )
+
+    fun getCountersOrElse() = this.counters?.likes ?: DEFAULT_COUNT
+
+    fun getTitleOrElse() = this.name ?: DEFAULT_TITLE
+
+    fun getMiddleColorOrElse(): String {
+        val middleColor = this.colors?.middle
+        return if(middleColor == "") DEFAULT_COLOR else "#${middleColor}"
+    }
+
+    fun getUrl(sizeWork: Int): String? {
+        return this.media?.makeUrl(Media.MediaRatio.o, Media.MediaSide.x, sizeWork)
+    }
 }
