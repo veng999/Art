@@ -26,7 +26,7 @@ private const val HAS_FIXED_SIZE = true
 class WorksFragment : Fragment() {
 
     @Inject
-    lateinit var factory: ViewModelProvider.Factory
+    internal lateinit var factory: ViewModelProvider.Factory
 
     private val viewModel: WorksViewModel by viewModels { factory }
     private var binding: FragmentWorksBinding? = null

@@ -14,9 +14,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WorksRemoteDataSource(private val dao: DaoInterface) : PositionalDataSource<Work>() {
+class WorksRemoteDataSource(
+    private val dao: DaoInterface,
+    private val api: ArtistApiService
+) : PositionalDataSource<Work>() {
 
-    private val api: ArtistApiService = ArtistApiService.create()
     private val compositeDisposable = CompositeDisposable()
     private val TAG = WorksRemoteDataSource::class.java.simpleName
     private val scope = CoroutineScope(Dispatchers.IO)

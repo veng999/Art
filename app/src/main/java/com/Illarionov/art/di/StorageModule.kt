@@ -7,6 +7,8 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+private const val DATABASE_NAME = "database"
+
 @Module
 class StorageModule {
 
@@ -15,6 +17,6 @@ class StorageModule {
     fun provideWorksDataBase() = Room.databaseBuilder(
         App.getApp().applicationContext,
         WorksDataBase::class.java,
-        "database"
+        DATABASE_NAME
     ).build().daoInterface()
 }
