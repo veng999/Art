@@ -6,7 +6,9 @@ import com.Illarionov.art.di.DaggerApplicationComponent
 
 class App : Application() {
 
-    lateinit var appComponent: ApplicationComponent
+    val appComponent by lazy(LazyThreadSafetyMode.NONE) {
+        DaggerApplicationComponent.builder().context(this).build()
+    }
 
     companion object {
         private lateinit var instance: App
@@ -17,7 +19,6 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerApplicationComponent.builder().context(this).build()
         instance = this
     }
 }

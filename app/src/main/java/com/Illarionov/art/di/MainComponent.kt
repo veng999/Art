@@ -10,7 +10,10 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     dependencies = [ApplicationComponent::class],
-    modules = [MainViewModelModule::class, StorageModule::class]
+    modules = [
+        MainViewModelModule::class,
+        StorageModule::class,
+        NetworkModule::class]
 )
 interface MainComponent {
     fun injectWorksFragment(fragment: WorksFragment)

@@ -21,7 +21,7 @@ import javax.inject.Inject
 class TaskListFragment : Fragment() {
 
     @Inject
-    lateinit var factory: ViewModelProvider.Factory
+    internal lateinit var factory: ViewModelProvider.Factory
     private var fragmentTaskListBinding: FragmentTaskListBinding? = null
     private val viewModel: TaskListViewModel by viewModels { factory }
     private var adapter = TaskListAdapter { id, isChecked ->

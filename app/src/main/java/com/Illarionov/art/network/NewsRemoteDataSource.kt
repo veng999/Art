@@ -8,11 +8,11 @@ import com.company.myartist.model.response.EventsResponse
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
-class NewsRemoteDataSource() : ItemKeyedDataSource<Long, Event>() {
+class NewsRemoteDataSource @Inject constructor(private val api: ArtistApiService) : ItemKeyedDataSource<Long, Event>() {
 
-    private val api: ArtistApiService = ArtistApiService.create()
     private val compositeDisposable = CompositeDisposable()
     private val TAG = NewsRemoteDataSource::class.java.simpleName
 

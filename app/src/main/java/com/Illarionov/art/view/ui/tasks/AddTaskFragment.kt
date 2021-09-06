@@ -38,7 +38,7 @@ private const val DATE_FORMAT = "E dd MMM HH:mm"
 class AddTaskFragment : Fragment() {
 
     @Inject
-    lateinit var factory: ViewModelProvider.Factory
+    internal lateinit var factory: ViewModelProvider.Factory
     private var binding: FragmentAddTaskBinding? = null
     private val viewModel: AddTaskViewModel by viewModels { factory }
     private val artImmHelper: ArtImmHelper by lazy { ArtImmHelperImpl(binding?.etName) }
