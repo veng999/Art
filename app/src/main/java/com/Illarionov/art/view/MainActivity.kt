@@ -10,12 +10,26 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.Illarionov.art.ArtImmHelperImpl
 import com.Illarionov.art.R
 import com.Illarionov.art.databinding.ActivityMainBinding
 import com.Illarionov.art.utils.AnimationHelper
 import navigation.FragmentNavigation
 
 class MainActivity : AppCompatActivity(), FragmentNavigation {
+
+    private val appBarConfiguration by lazy(LazyThreadSafetyMode.NONE) {
+        AppBarConfiguration(
+            setOf(
+                R.id.menu_artist,
+                R.id.menu_works
+            ), binding.drawerLayout
+        )
+    }
+
+    private val bottomNavView by lazy(LazyThreadSafetyMode.NONE) {
+        binding.bottomNavigationView
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,29 +60,14 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
         }
     }
 
-    private val navController by lazy {
+    private val navController by lazy(LazyThreadSafetyMode.NONE) {
         (supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
             .navController
     }
 
-    private val binding: ActivityMainBinding by lazy {
+    private val binding: ActivityMainBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityMainBinding.inflate(layoutInflater)
-    }
-
-    private val appBarConfiguration by lazy {
-        AppBarConfiguration(
-            setOf(
-                /*R.id.menu_newsFeed,*/
-                R.id.menu_artist,
-                R.id.menu_works
-                /*R.id.menu_more*/
-            ), binding.drawerLayout
-        )
-    }
-
-    private val bottomNavView by lazy {
-        binding.bottomNavigationView
     }
 
     private fun setActionBarColor() {
@@ -108,6 +107,11 @@ class MainActivity : AppCompatActivity(), FragmentNavigation {
 
     private fun navigate(action: Int) {
         val options = AnimationHelper.getNavOptionsWithAnim()
-        navController.navigate(action, null, options)
+        val artImmHelper = ArtImmHelperImpl(this.bottomNavView)
+        artImmHelper.hideSoftInput()
+        // Todo: Костыль для того чтобы не открывались дубликаты фрагментов
+        if (navController.currentBackStackEntry?.destination?.id != action) {
+            navController.navigate(action, null, options)
+        }
     }
 }

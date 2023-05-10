@@ -41,7 +41,9 @@ class AddTaskFragment : Fragment() {
     internal lateinit var factory: ViewModelProvider.Factory
     private var binding: FragmentAddTaskBinding? = null
     private val viewModel: AddTaskViewModel by viewModels { factory }
-    private val artImmHelper: ArtImmHelper by lazy { ArtImmHelperImpl(binding?.etName) }
+    private val artImmHelper: ArtImmHelper by lazy(
+        LazyThreadSafetyMode.NONE
+    ) { ArtImmHelperImpl(binding?.etName) }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -17,11 +17,8 @@ inline fun <T> Fragment.observe(data: LiveData<T>, crossinline callback: (T) -> 
 inline fun <T> AppCompatActivity.observe(data: LiveData<T>, crossinline callback: (T) -> Unit) =
     data.observe(this, Observer { event -> event.let { callback(it) } })
 
-/*inline val Fragment.factory: ViewModelProvider.Factory
-    get() = (requireActivity().application as App).factory*/
-
 fun Activity.getRootView(): View {
-    return findViewById<View>(android.R.id.content)
+    return findViewById(android.R.id.content)
 }
 
 fun Activity.getViewTreeObserver() = getRootView().viewTreeObserver

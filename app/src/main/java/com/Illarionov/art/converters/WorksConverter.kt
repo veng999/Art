@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
 
-class WorksConverter{
+class WorksConverter {
 
     private val gson = Gson()
 
@@ -18,7 +18,7 @@ class WorksConverter{
     }
 
     @TypeConverter
-    fun stringFromList(list: List<Work>): String{
+    fun stringFromList(list: List<Work>): String {
         return gson.toJson(list)
     }
 }
